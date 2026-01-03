@@ -1,6 +1,14 @@
 # MoneyMarket - P2P Lending Platform
 
-A comprehensive **Peer-to-Peer Lending Marketplace** built with .NET 8, demonstrating enterprise-grade software architecture and modern development practices.
+A comprehensive **Peer-to-Peer Lending Marketplace** built with .NET 8 and Angular 17+, demonstrating enterprise-grade software architecture and modern development practices.
+
+## Demo Screenshots
+
+### Landing Page
+![MoneyMarket Landing Page](screen%20shots/MoneyMarketPro%20landing.png)
+
+### User Registration
+![MoneyMarket Registration](screen%20shots/MoneyMarketPro%20register.png)
 
 ## Architecture
 
@@ -8,6 +16,10 @@ This project implements **Clean Architecture** with **Domain-Driven Design (DDD)
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
+│                         Frontend                                │
+│                    (Angular 17+ SPA)                           │
+│     Components, Services, Guards, Material UI, SCSS            │
+├─────────────────────────────────────────────────────────────────┤
 │                        Presentation                             │
 │                     (MoneyMarket.API)                           │
 │         Controllers, Middleware, Authorization                  │
@@ -28,6 +40,7 @@ This project implements **Clean Architecture** with **Domain-Driven Design (DDD)
 
 ## Tech Stack
 
+### Backend
 | Category | Technologies |
 |----------|-------------|
 | **Framework** | .NET 8, ASP.NET Core Web API |
@@ -40,6 +53,17 @@ This project implements **Clean Architecture** with **Domain-Driven Design (DDD)
 | **Documentation** | Swagger/OpenAPI with XML comments |
 | **Testing** | xUnit, FluentAssertions |
 | **Security** | BCrypt password hashing, HTTP-only cookies |
+
+### Frontend
+| Category | Technologies |
+|----------|-------------|
+| **Framework** | Angular 17+ (Standalone Components) |
+| **UI Library** | Angular Material |
+| **Styling** | SCSS with CSS Custom Properties |
+| **State Management** | Angular Signals |
+| **HTTP** | HttpClient with Interceptors |
+| **Routing** | Angular Router with Guards |
+| **Forms** | Reactive Forms with Validation |
 
 ## Features
 
@@ -57,6 +81,13 @@ This project implements **Clean Architecture** with **Domain-Driven Design (DDD)
 - **Loans** - Marketplace listing, funding, disbursement, repayment schedules
 - **Payments** - Payment processing, history tracking
 - **Wallets** - Balance management, transaction history
+
+### Frontend Features
+- **Halifax Bank-inspired design** - Professional blue theme with modern UI
+- **Responsive design** - Mobile-first approach
+- **Role-based dashboards** - Different views for Borrowers, Lenders, and Admins
+- **Lazy-loaded modules** - Optimized bundle sizes
+- **Form validation** - Real-time validation with error messages
 
 ### API Endpoints
 
@@ -148,10 +179,28 @@ MoneyMarketPro/
 │       ├── Controllers/              # API controllers
 │       └── Middleware/               # Exception handling
 │
-└── tests/
-    ├── MoneyMarket.Domain.Tests/     # Domain unit tests
-    ├── MoneyMarket.Application.Tests/# Application unit tests
-    └── MoneyMarket.API.IntegrationTests/  # API integration tests
+├── client/                           # Angular Frontend
+│   └── src/
+│       ├── app/
+│       │   ├── core/                 # Services, guards, interceptors, models
+│       │   ├── layouts/              # Header, footer, main layout
+│       │   ├── features/             # Feature modules
+│       │   │   ├── auth/             # Login, register
+│       │   │   ├── public/           # Landing page
+│       │   │   ├── borrower/         # Borrower dashboard
+│       │   │   ├── lender/           # Lender dashboard
+│       │   │   └── admin/            # Admin dashboard
+│       │   └── shared/               # Shared components
+│       ├── environments/             # Environment configs
+│       └── styles.scss               # Global styles & theme
+│
+├── tests/
+│   ├── MoneyMarket.Domain.Tests/     # Domain unit tests
+│   ├── MoneyMarket.Application.Tests/# Application unit tests
+│   └── MoneyMarket.API.IntegrationTests/  # API integration tests
+│
+├── design examples/                  # UI design references
+└── screen shots/                     # Application screenshots
 ```
 
 ## Design Patterns & Practices
@@ -171,13 +220,14 @@ MoneyMarketPro/
 
 ### Prerequisites
 - .NET 8 SDK
+- Node.js 18+ and npm
 - Visual Studio 2022 / VS Code / Rider
 
-### Run the API
+### Run the Backend API
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/MoneyMarketPro.git
+git clone https://github.com/dotnetdeveloper20xx/MoneyMarketPro.git
 cd MoneyMarketPro
 
 # Build the solution
@@ -191,7 +241,22 @@ cd src/MoneyMarket.API
 dotnet run
 ```
 
-### Access the API
+### Run the Frontend
+
+```bash
+# Navigate to client folder
+cd client
+
+# Install dependencies
+npm install
+
+# Start development server
+ng serve
+```
+
+### Access the Application
+- **Frontend**: http://localhost:4200
+- **Backend API**: http://localhost:5133
 - **Swagger UI**: http://localhost:5133/swagger
 - **Health Check**: http://localhost:5133/api/health
 
@@ -232,10 +297,18 @@ curl -X POST http://localhost:5133/api/auth/login \
 }
 ```
 
+### Frontend Environment (environment.ts)
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:5133/api'
+};
+```
+
 ## Testing
 
 ```bash
-# Run all tests
+# Run all backend tests
 dotnet test
 
 # Run with coverage
@@ -243,6 +316,9 @@ dotnet test --collect:"XPlat Code Coverage"
 
 # Run specific test project
 dotnet test tests/MoneyMarket.Domain.Tests
+
+# Run frontend tests
+cd client && ng test
 ```
 
 **Test Coverage:**
@@ -284,22 +360,16 @@ public sealed class Money : ValueObject
 }
 ```
 
-### CQRS with MediatR
-```csharp
-// Command
-public record CreateLoanApplicationCommand(
-    Guid BorrowerProfileId,
-    decimal Amount,
-    int TermMonths,
-    LoanPurpose Purpose) : ICommand<Guid>;
+### Angular Auth Service with Signals
+```typescript
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private accessToken = signal<string | null>(null);
+  private currentUserSignal = signal<User | null>(null);
 
-// Handler
-public class CreateLoanApplicationCommandHandler
-    : ICommandHandler<CreateLoanApplicationCommand, Guid>
-{
-    public async Task<Result<Guid>> Handle(
-        CreateLoanApplicationCommand request,
-        CancellationToken cancellationToken) { ... }
+  readonly isAuthenticated = computed(() => !!this.accessToken());
+  readonly currentUser = computed(() => this.currentUserSignal());
+  readonly isBorrower = computed(() => this.userRoles().includes('Borrower'));
 }
 ```
 
@@ -309,4 +379,4 @@ This project is licensed under the MIT License.
 
 ---
 
-Built with .NET 8 | Clean Architecture | Domain-Driven Design
+Built with .NET 8 | Angular 17 | Clean Architecture | Domain-Driven Design

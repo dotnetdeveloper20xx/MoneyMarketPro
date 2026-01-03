@@ -1,0 +1,426 @@
+// MoneyMarket P2P Lending Platform - Global Styles
+// Halifax Bank inspired design system
+
+@use '@angular/material' as mat;
+
+// ============================================
+// Halifax Bank Color Palette
+// ============================================
+$primary-blue: #003087;
+$secondary-blue: #0066B3;
+$light-blue: #E8F4FD;
+$white: #FFFFFF;
+$gray-100: #F5F5F5;
+$gray-200: #EEEEEE;
+$gray-300: #E0E0E0;
+$gray-600: #666666;
+$gray-900: #1A1A1A;
+$success: #2E7D32;
+$error: #D32F2F;
+$warning: #ED6C02;
+
+// Custom Halifax-inspired palette
+$money-market-primary: (
+  50: #e0e7f1,
+  100: #b3c4dc,
+  200: #809dc5,
+  300: #4d76ad,
+  400: #26589c,
+  500: #003087,
+  600: #002b7f,
+  700: #002474,
+  800: #001e6a,
+  900: #001357,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$money-market-accent: (
+  50: #e0f0f8,
+  100: #b3d9ee,
+  200: #80c0e3,
+  300: #4da7d8,
+  400: #2694d0,
+  500: #0066B3,
+  600: #005ea5,
+  700: #005394,
+  800: #004984,
+  900: #003867,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+// Angular Material Theme Configuration
+html {
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$blue-palette,
+      tertiary: mat.$cyan-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  color-scheme: light;
+  background-color: $gray-100;
+  color: $gray-900;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  height: 100%;
+  line-height: 1.5;
+}
+
+// ============================================
+// CSS Custom Properties (Design Tokens)
+// ============================================
+:root {
+  // Colors
+  --mm-primary: #{$primary-blue};
+  --mm-primary-dark: #002266;
+  --mm-secondary: #{$secondary-blue};
+  --mm-light-blue: #{$light-blue};
+  --mm-white: #{$white};
+  --mm-gray-100: #{$gray-100};
+  --mm-gray-200: #{$gray-200};
+  --mm-gray-300: #{$gray-300};
+  --mm-gray-600: #{$gray-600};
+  --mm-gray-900: #{$gray-900};
+  --mm-success: #{$success};
+  --mm-error: #{$error};
+  --mm-warning: #{$warning};
+
+  // Spacing
+  --mm-spacing-xs: 4px;
+  --mm-spacing-sm: 8px;
+  --mm-spacing-md: 16px;
+  --mm-spacing-lg: 24px;
+  --mm-spacing-xl: 32px;
+  --mm-spacing-xxl: 48px;
+
+  // Border radius
+  --mm-radius-sm: 4px;
+  --mm-radius-md: 8px;
+  --mm-radius-lg: 12px;
+  --mm-radius-xl: 24px;
+  --mm-radius-full: 50%;
+
+  // Shadows
+  --mm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --mm-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --mm-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  // Transitions
+  --mm-transition-fast: 150ms ease-in-out;
+  --mm-transition-normal: 250ms ease-in-out;
+}
+
+// ============================================
+// Global Typography
+// ============================================
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--mm-gray-900);
+  margin: 0 0 var(--mm-spacing-md);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+p {
+  margin: 0 0 var(--mm-spacing-md);
+}
+
+a {
+  color: var(--mm-secondary);
+  text-decoration: none;
+  transition: color var(--mm-transition-fast);
+
+  &:hover {
+    color: var(--mm-primary);
+    text-decoration: underline;
+  }
+}
+
+// ============================================
+// Global Utility Classes
+// ============================================
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--mm-spacing-md);
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: var(--mm-primary); }
+.text-secondary { color: var(--mm-secondary); }
+.text-success { color: var(--mm-success); }
+.text-error { color: var(--mm-error); }
+.text-muted { color: var(--mm-gray-600); }
+
+.bg-primary { background-color: var(--mm-primary); }
+.bg-light { background-color: var(--mm-gray-100); }
+.bg-white { background-color: var(--mm-white); }
+.bg-light-blue { background-color: var(--mm-light-blue); }
+
+// Spacing utilities
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--mm-spacing-xs); }
+.mt-2 { margin-top: var(--mm-spacing-sm); }
+.mt-3 { margin-top: var(--mm-spacing-md); }
+.mt-4 { margin-top: var(--mm-spacing-lg); }
+.mt-5 { margin-top: var(--mm-spacing-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--mm-spacing-xs); }
+.mb-2 { margin-bottom: var(--mm-spacing-sm); }
+.mb-3 { margin-bottom: var(--mm-spacing-md); }
+.mb-4 { margin-bottom: var(--mm-spacing-lg); }
+.mb-5 { margin-bottom: var(--mm-spacing-xl); }
+
+// ============================================
+// Card Component
+// ============================================
+.mm-card {
+  background: var(--mm-white);
+  border-radius: var(--mm-radius-md);
+  box-shadow: var(--mm-shadow-sm);
+  padding: var(--mm-spacing-lg);
+  transition: box-shadow var(--mm-transition-normal);
+
+  &:hover {
+    box-shadow: var(--mm-shadow-md);
+  }
+
+  &__header {
+    border-bottom: 1px solid var(--mm-gray-200);
+    padding-bottom: var(--mm-spacing-md);
+    margin-bottom: var(--mm-spacing-md);
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+// ============================================
+// Button Overrides for Material
+// ============================================
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-flat-button {
+  border-radius: var(--mm-radius-xl) !important;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.025em;
+}
+
+.mm-btn-primary {
+  background-color: var(--mm-primary) !important;
+  color: var(--mm-white) !important;
+
+  &:hover {
+    background-color: var(--mm-primary-dark) !important;
+  }
+}
+
+.mm-btn-secondary {
+  background-color: var(--mm-secondary) !important;
+  color: var(--mm-white) !important;
+}
+
+.mm-btn-outline {
+  border: 2px solid var(--mm-primary) !important;
+  color: var(--mm-primary) !important;
+  background: transparent !important;
+
+  &:hover {
+    background-color: var(--mm-light-blue) !important;
+  }
+}
+
+// ============================================
+// Form Styles
+// ============================================
+.mm-form-field {
+  width: 100%;
+  margin-bottom: var(--mm-spacing-md);
+}
+
+// ============================================
+// Page Layout
+// ============================================
+.mm-page {
+  min-height: calc(100vh - 64px);
+  padding: var(--mm-spacing-xl) 0;
+}
+
+.mm-page-header {
+  margin-bottom: var(--mm-spacing-xl);
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--mm-gray-900);
+    margin: 0 0 var(--mm-spacing-sm);
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: var(--mm-gray-600);
+    margin: 0;
+  }
+}
+
+// ============================================
+// Dashboard Grid
+// ============================================
+.mm-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--mm-spacing-lg);
+}
+
+.mm-stat-card {
+  background: var(--mm-white);
+  border-radius: var(--mm-radius-md);
+  padding: var(--mm-spacing-lg);
+  box-shadow: var(--mm-shadow-sm);
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--mm-radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--mm-spacing-md);
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &--primary {
+      background-color: var(--mm-light-blue);
+      color: var(--mm-primary);
+    }
+
+    &--success {
+      background-color: #E8F5E9;
+      color: var(--mm-success);
+    }
+
+    &--warning {
+      background-color: #FFF3E0;
+      color: var(--mm-warning);
+    }
+  }
+
+  &__value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--mm-gray-900);
+    margin-bottom: var(--mm-spacing-xs);
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    color: var(--mm-gray-600);
+  }
+}
+
+// ============================================
+// Status Badges
+// ============================================
+.mm-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--mm-radius-xl);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &--pending {
+    background-color: #FFF3E0;
+    color: var(--mm-warning);
+  }
+
+  &--approved, &--active, &--success {
+    background-color: #E8F5E9;
+    color: var(--mm-success);
+  }
+
+  &--rejected, &--error {
+    background-color: #FFEBEE;
+    color: var(--mm-error);
+  }
+
+  &--info {
+    background-color: var(--mm-light-blue);
+    color: var(--mm-primary);
+  }
+}
+
+// ============================================
+// Tables
+// ============================================
+.mm-table {
+  width: 100%;
+  background: var(--mm-white);
+  border-radius: var(--mm-radius-md);
+  overflow: hidden;
+  box-shadow: var(--mm-shadow-sm);
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+
+  .container {
+    padding: 0 var(--mm-spacing-sm);
+  }
+
+  .mm-page {
+    padding: var(--mm-spacing-md) 0;
+  }
+}
