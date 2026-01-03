@@ -107,6 +107,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Seed the database in development
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+    await seeder.SeedAsync();
+}
+
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
