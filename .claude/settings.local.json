@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(dotnet add:*)",
+      "Bash(if exist testsMoneyMarket.Domain.TestsUnitTest1.cs del testsMoneyMarket.Domain.TestsUnitTest1.cs)",
+      "Bash(if exist testsMoneyMarket.Application.TestsUnitTest1.cs del testsMoneyMarket.Application.TestsUnitTest1.cs)",
+      "Bash(if exist testsMoneyMarket.API.IntegrationTestsUnitTest1.cs del testsMoneyMarket.API.IntegrationTestsUnitTest1.cs)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

@@ -1,0 +1,414 @@
+﻿
+## Prompt for Claude
+
+You are acting as a **Senior Software Architect and Lead .NET Engineer** with deep experience in **fintech platforms**, **Clean Architecture**, **CQRS**, **Domain-Driven Design (DDD)**, and **Azure-hosted enterprise systems**.
+
+Your task is to generate a **comprehensive technical project document** for the following system:
+
+---
+
+# **MoneyMarket Platform – Technical Design & Implementation Guide**
+
+## Objective
+
+Produce a **step-by-step, implementation-ready project document** that explains:
+
+* **How the system works**
+* **Why architectural decisions were made**
+* **How to implement the platform from scratch**
+* **How it scales, stays secure, and remains auditable**
+
+The document must clearly demonstrate the **thought process of a Senior Software Architect**, not just list features.
+
+---
+
+## Technology & Constraints (Mandatory)
+
+Design and implementation **must strictly follow** these constraints:
+
+* **Backend:** ASP.NET (latest LTS)
+* **Architecture:** Clean Architecture
+
+  * Domain
+  * Application
+  * Infrastructure
+  * Persistence
+  * API
+  * Tests
+* **Patterns:**
+
+  * CQRS (Commands / Queries separation)
+  * MediatR pipelines
+  * DDD Aggregates, Value Objects, Domain Events
+* **Database:**
+
+  * SQL Server (primary)
+  * In-Memory provider for local/dev/testing
+* **Hosting:** Azure App Services (Linux or Windows)
+* **Storage:** Azure Blob Storage (documents, KYC, collateral)
+* **Messaging/Eventing:** Azure Service Bus or Event Grid (conceptual + optional implementation)
+* **Security:** RBAC, GDPR, encryption at rest & in transit
+* **Local Development:**
+
+  * Everything runnable locally
+  * No cloud dependency required for development
+* **Version Control:** Git (branching strategy included)
+
+---
+
+## Required Output Structure
+
+### 1. Executive Overview
+
+* High-level description of the MoneyMarket platform
+* Two-sided marketplace explanation (Borrowers ↔ Lenders)
+* Business value and monetisation model
+* Why this architecture is suitable for fintech
+
+---
+
+### 2. Domain Model & DDD Analysis
+
+Explain the **core domain** in detail:
+
+* Bounded contexts
+* Aggregate roots
+* Entities vs Value Objects
+* Domain invariants
+* Why **Loan** is a first-class aggregate
+
+Include:
+
+* Borrower Profile
+* Lender Profile
+* Loan lifecycle
+* Repayment schedules
+* Risk & underwriting concepts
+* Audit & compliance considerations
+
+---
+
+### 3. Roles & End-to-End Workflows
+
+For each role, explain:
+
+* Responsibilities
+* Permissions
+* Typical workflows
+* Key domain interactions
+
+Roles:
+
+* Borrower
+* Lender
+* Credit Risk Manager (CRM)
+* Admin
+* Support Staff
+
+Include **sequence-style explanations** (textual) for:
+
+* Borrower loan application
+* CRM approval
+* Admin loan approval
+* Lender funding
+* Repayments
+* Defaults and restructuring
+
+---
+
+### 4. Loan Lifecycle as a State Machine
+
+Define:
+
+* All loan states
+* Allowed transitions
+* Events emitted at each transition
+* Business rules enforcing transitions
+
+Include:
+
+* PendingFunding
+* Active
+* InArrears
+* Restructured
+* Completed
+* Defaulted
+* Cancelled
+
+---
+
+### 5. CQRS Design
+
+Explain clearly:
+
+* Why CQRS is used here
+* Command responsibility vs Query responsibility
+* Idempotency
+* Validation strategies
+
+Provide examples of:
+
+* Commands (ApplyLoan, ApproveLoan, FundLoan, MakePayment)
+* Queries (GetBorrowerDashboard, GetLenderPortfolio)
+* Command and Query handlers
+* Pipeline behaviours (logging, validation, auditing)
+
+---
+
+### 6. Clean Architecture Folder & Project Structure
+
+Provide an **exact solution structure**, including:
+
+* Project names
+* Dependencies direction
+* What belongs where (and what does NOT)
+
+Explain:
+
+* Why the Domain project has zero dependencies
+* How Infrastructure is plugged in
+* How persistence is abstracted
+
+---
+
+### 7. Database Design & Persistence
+
+Detail:
+
+* SQL schema design
+* Key tables
+* Relationships
+* Indexing strategy
+* Audit tables
+* Soft deletes vs immutable logs
+
+Explain:
+
+* How aggregates are persisted
+* How read models differ from write models
+* Seeding strategy for local development
+
+---
+
+### 8. Notifications & Messaging
+
+Explain:
+
+* Domain events vs integration events
+* Notification generation
+* Real-time dashboard alerts
+* Message threads between users and support
+
+---
+
+### 9. Dashboards & Read Models
+
+For each dashboard:
+
+* Borrower
+* Lender
+* Admin
+* CRM
+* Support
+
+Explain:
+
+* Required queries
+* Aggregated data
+* Performance considerations
+* Caching strategies (if applicable)
+
+---
+
+### 10. Security, Compliance & Auditability
+
+Deep-dive into:
+
+* RBAC model
+* Claims vs roles
+* GDPR compliance
+* Encryption strategies
+* Secure document access
+* Immutable audit logging
+* Optional event-sourcing approach
+
+---
+
+### 11. Local Development Setup (Step-by-Step)
+
+Provide:
+
+* How to run everything locally
+* Environment configuration
+* In-memory vs SQL switching
+* Seed data setup
+* Developer onboarding steps
+
+---
+
+### 12. CI/CD & Git Strategy
+
+Explain:
+
+* Git branching model
+* Commit conventions
+* PR validation
+* CI pipeline
+* Azure App Service deployment flow
+
+---
+
+### 13. Future Enhancements
+
+Cover:
+
+* Event sourcing
+* Microservices extraction
+* Fraud detection
+* Credit scoring integration
+* Reporting & analytics
+* Open Banking APIs
+
+---
+
+## Writing Style Requirements
+
+* Clear, structured, and professional
+* No marketing fluff
+* Written as if onboarding a senior engineering team
+* Explain **why**, not just **what**
+* Use diagrams descriptions where useful (textual, not images)
+
+---
+
+## Final Requirement
+
+This document must read like:
+
+* A **real internal architecture document**
+* Suitable for:
+
+  * Enterprise review
+  * Investor due diligence
+  * Engineering onboarding
+  * Long-term system evolution
+
+---
+
+### Begin now with the following final instruction:
+come up with a detailed project plan, I mean very deep plan, such as visual studio solution, projects, folders, packages, classes,
+  patterns, local sql connection string, ef, deep and detailed domain and dto classes. Front-end in Angular, plan each and every component, enterprize level state management
+  for the app and components. Demo the best of the best to pass our international code and architecture reveiws, these applications will build our online consultantncy and
+  repotuion. We will implement the on phases and then commit them locally and remote with a nice professional commit messages. NEVER COMMIT ANY CLAUDE FILES OR .MD FILES, ONLY
+  MD FILE ALLOWED IS README.MD FOR COMMIT TO GIT.
+
+  Save your response as "MoneyMarket Platform – Technical Design & Implementation Guide".
+  Always follow the latest .NET and Angular best practices as of 2024.
+  always follow Clean Architecture and DDD principles.
+  always follow enterprise level security and compliance best practices.
+  always follow enterprise level CI/CD and git branching strategies.
+  always follow enterprise level coding standards and patterns.
+  always follow enterprise level documentation standards.
+  always follow enterprise level testing strategies and patterns.
+  always follow enterprise level performance and scalability best practices.
+  always follow enterprise level maintainability and extensibility best practices.
+  always follow enterprise level monitoring and logging best practices.
+  always follow enterprise level error handling and resilience best practices.
+  always follow enterprise level UX and UI best practices.
+  always follow enterprise level state management best practices.
+  always follow enterprise level API design best practices.
+  always follow enterprise level database design best practices.
+  always follow enterprise level messaging and eventing best practices.
+  always follow enterprise level notification and alerting best practices.
+  always follow enterprise level dashboard and reporting best practices.
+  always follow enterprise level local development setup best practices.
+  always follow enterprise level future enhancement planning best practices.
+  always follow enterprise level project management best practices.
+  always follow enterprise level team collaboration best practices.
+  always follow enterprise level code review best practices.
+  always follow enterprise level architecture review best practices.
+  always follow enterprise level investor due diligence best practices.
+  always follow enterprise level engineering onboarding best practices.
+  always follow enterprise level long-term system evolution best practices.
+  always follow enterprise level international code and architecture review best practices.
+  always follow enterprise level consultancy and reputation building best practices.
+  always follow enterprise level commit message best practices.
+  always follow enterprise level file and folder naming best practices.
+  always follow enterprise level solution and project structuring best practices.
+  always follow enterprise level class and method naming best practices.
+  always follow enterprise level package and dependency management best practices.
+  always follow enterprise level version control best practices.
+  always follow enterprise level documentation and commenting best practices.
+  always follow enterprise level code formatting and styling best practices.
+  always follow enterprise level code optimization and refactoring best practices.
+  always follow enterprise level code modularization and encapsulation best practices.
+  always follow enterprise level code readability and maintainability best practices.
+  always follow enterprise level code testability and coverage best practices.
+  always follow enterprise level code performance and scalability best practices.
+  always follow enterprise level code security and compliance best practices.
+  always follow enterprise level code reliability and resilience best practices.
+  always follow enterprise level code usability and accessibility best practices.
+  always follow enterprise level code innovation and creativity best practices.
+  always follow enterprise level code professionalism and ethics best practices.
+  always follow enterprise level code excellence and quality best practices.
+  always follow enterprise level code leadership and mentorship best practices.
+  always follow enterprise level code teamwork and collaboration best practices.
+  always follow enterprise level code continuous improvement and learning best practices.
+  always follow enterprise level code customer focus and satisfaction best practices.
+  always follow enterprise level code business value and impact best practices.
+  always follow enterprise level code industry standards and trends best practices.
+  always follow enterprise level code future-proofing and adaptability best practices.
+  always follow enterprise level code global and cultural considerations best practices.
+  always follow enterprise level code sustainability and environmental considerations best practices.
+  always follow enterprise level code social responsibility and ethical considerations best practices.
+  always follow enterprise level code innovation and disruption best practices.
+  always follow enterprise level code thought leadership and influence best practices.
+  always follow enterprise level code strategic alignment and vision best practices.
+  always follow enterprise level code competitive advantage and differentiation best practices.
+  always follow enterprise level code market positioning and branding best practices.
+  always follow enterprise level code stakeholder engagement and communication best practices.
+  always follow enterprise level code risk management and mitigation best practices.
+  always follow enterprise level code change management and adoption best practices.
+  always follow enterprise level code project management and delivery best practices.
+  always follow enterprise level code quality assurance and control best practices.
+  always follow enterprise level code governance and oversight best practices.
+  always follow enterprise level code legal and regulatory compliance best practices.
+  always follow enterprise level code intellectual property and licensing best practices.
+  always follow enterprise level code data privacy and protection best practices.
+  always follow enterprise level code ethical hacking and penetration testing best practices.
+  always follow enterprise level code disaster recovery and business continuity best practices.
+  always follow enterprise level code innovation labs and R&D best practices.
+  always follow enterprise level code hackathons and innovation challenges best practices.
+  always follow enterprise level code community engagement and open source best practices.
+  always follow enterprise level code conferences and speaking engagements best practices.
+  always follow enterprise level code publications and thought pieces best practices.
+  always follow enterprise level code awards and recognitions best practices.
+  always follow enterprise level code partnerships and collaborations best practices.
+  always follow enterprise level code customer success and support best practices.
+  always follow enterprise level code feedback and improvement best practices.
+  always follow enterprise level code retrospectives and lessons learned best practices.
+  always follow enterprise level code knowledge sharing and documentation best practices.
+  always follow enterprise level code onboarding and training best practices.
+  always follow enterprise level code career development and growth best practices.
+
+
+  ##Futher hints:
+   Key Technical Requirements:
+  - Backend: ASP.NET (.NET 8 LTS) with Clean Architecture, CQRS, DDD, MediatR
+  - Frontend: Angular with enterprise-level state management
+  - Database: SQL Server (with In-Memory for dev/testing)
+  - Hosting: Azure App Services, Blob Storage, Service Bus
+  - Security: RBAC, GDPR compliance, encryption, audit logging
+
+  Core Domain Concepts:
+  - Borrower/Lender profiles
+  - Loan lifecycle (state machine with PendingFunding → Active → InArrears → Completed/Defaulted)
+  - Risk/underwriting, repayment schedules
+  - Multi-role system (Borrower, Lender, CRM, Admin, Support)
+
+  Deliverables Expected:
+  1. Technical Design & Implementation Guide document
+  2. Complete Visual Studio solution structure
+  3. Deep domain models, DTOs, and classes
+  4. Angular components with state management
+  5. Phased implementation with professional Git commits
