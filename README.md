@@ -1,382 +1,265 @@
-# MoneyMarket - P2P Lending Platform
+# MoneyMarket Pro - P2P Lending Platform
 
-A comprehensive **Peer-to-Peer Lending Marketplace** built with .NET 8 and Angular 17+, demonstrating enterprise-grade software architecture and modern development practices.
+## Transform Your Financial Services with Modern Technology
 
-## Demo Screenshots
-
-### Landing Page
-![MoneyMarket Landing Page](screen%20shots/MoneyMarketPro%20landing.png)
-
-### User Registration
-![MoneyMarket Registration](screen%20shots/MoneyMarketPro%20register.png)
-
-## Architecture
-
-This project implements **Clean Architecture** with **Domain-Driven Design (DDD)** principles, ensuring separation of concerns, testability, and maintainability.
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         Frontend                                │
-│                    (Angular 17+ SPA)                           │
-│     Components, Services, Guards, Material UI, SCSS            │
-├─────────────────────────────────────────────────────────────────┤
-│                        Presentation                             │
-│                     (MoneyMarket.API)                           │
-│         Controllers, Middleware, Authorization                  │
-├─────────────────────────────────────────────────────────────────┤
-│                        Application                              │
-│                  (MoneyMarket.Application)                      │
-│     CQRS Commands/Queries, Handlers, Validators, DTOs          │
-├─────────────────────────────────────────────────────────────────┤
-│                          Domain                                 │
-│                    (MoneyMarket.Domain)                         │
-│      Entities, Value Objects, Aggregates, Domain Events        │
-├─────────────────────────────────────────────────────────────────┤
-│                       Infrastructure                            │
-│    (MoneyMarket.Infrastructure + MoneyMarket.Persistence)      │
-│     External Services, EF Core, Repositories, Auth             │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-## Tech Stack
-
-### Backend
-| Category | Technologies |
-|----------|-------------|
-| **Framework** | .NET 8, ASP.NET Core Web API |
-| **Architecture** | Clean Architecture, CQRS, DDD |
-| **Authentication** | JWT Bearer Tokens, Refresh Token Rotation |
-| **Authorization** | Policy-based Role Authorization |
-| **Data Access** | Entity Framework Core 8, In-Memory Database |
-| **Validation** | FluentValidation |
-| **Mediator** | MediatR (Command/Query dispatching) |
-| **Documentation** | Swagger/OpenAPI with XML comments |
-| **Testing** | xUnit, FluentAssertions |
-| **Security** | BCrypt password hashing, HTTP-only cookies |
-
-### Frontend
-| Category | Technologies |
-|----------|-------------|
-| **Framework** | Angular 17+ (Standalone Components) |
-| **UI Library** | Angular Material |
-| **Styling** | SCSS with CSS Custom Properties |
-| **State Management** | Angular Signals |
-| **HTTP** | HttpClient with Interceptors |
-| **Routing** | Angular Router with Guards |
-| **Forms** | Reactive Forms with Validation |
-
-## Features
-
-### Authentication & Authorization
-- JWT access tokens with configurable expiration
-- Secure refresh token rotation stored in HTTP-only cookies
-- BCrypt password hashing with strength validation
-- Role-based authorization policies (Borrower, Lender, CRM, Admin, Support)
-
-### Domain Model
-- **Users** - Multi-role support, profile management
-- **Borrower Profiles** - KYC verification, employment info, credit scoring
-- **Lender Profiles** - Investment preferences, accreditation status
-- **Loan Applications** - Full workflow (Draft → Submitted → Under Review → Approved/Rejected)
-- **Loans** - Marketplace listing, funding, disbursement, repayment schedules
-- **Payments** - Payment processing, history tracking
-- **Wallets** - Balance management, transaction history
-
-### Frontend Features
-- **Halifax Bank-inspired design** - Professional blue theme with modern UI
-- **Responsive design** - Mobile-first approach
-- **Role-based dashboards** - Different views for Borrowers, Lenders, and Admins
-- **Lazy-loaded modules** - Optimized bundle sizes
-- **Form validation** - Real-time validation with error messages
-
-### API Endpoints
-
-#### Authentication (Public)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register new user account |
-| POST | `/api/auth/login` | Authenticate and receive tokens |
-| POST | `/api/auth/refresh-token` | Refresh access token |
-| POST | `/api/auth/logout` | Revoke refresh token |
-| POST | `/api/auth/change-password` | Change password (authenticated) |
-| GET | `/api/auth/me` | Get current user info |
-
-#### Borrowers (Borrower Role)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/borrowers` | Create borrower profile |
-| GET | `/api/borrowers/{id}` | Get borrower profile |
-| PUT | `/api/borrowers/{id}` | Update borrower profile |
-
-#### Lenders (Lender Role)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/lenders` | Create lender profile |
-| GET | `/api/lenders/{id}` | Get lender profile |
-| PUT | `/api/lenders/{id}/preferences` | Update investment preferences |
-| GET | `/api/lenders/{id}/investments` | Get lender investments |
-
-#### Loan Applications (Mixed Roles)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/loanapplications` | Create application (Borrower) |
-| POST | `/api/loanapplications/{id}/submit` | Submit for review (Borrower) |
-| GET | `/api/loanapplications/pending` | Get pending applications (CRM/Admin) |
-| POST | `/api/loanapplications/{id}/approve` | Approve application (CRM/Admin) |
-| POST | `/api/loanapplications/{id}/reject` | Reject application (CRM/Admin) |
-
-#### Loans (Mixed Roles)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/loans/marketplace` | Browse available loans (Lender) |
-| POST | `/api/loans/{id}/fund` | Fund a loan (Lender) |
-| POST | `/api/loans/{id}/disburse` | Disburse to borrower (CRM/Admin) |
-
-#### Wallets (Borrower/Lender)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/wallets/{userId}` | Get wallet balance |
-| GET | `/api/wallets/{userId}/transactions` | Get transaction history |
-| POST | `/api/wallets/{userId}/deposit` | Deposit funds |
-| POST | `/api/wallets/{userId}/withdraw` | Withdraw funds |
-
-## Project Structure
-
-```
-MoneyMarketPro/
-├── src/
-│   ├── MoneyMarket.Domain/           # Enterprise business rules
-│   │   ├── Common/                   # Base classes (Entity, ValueObject, Result)
-│   │   ├── Entities/                 # Domain entities and aggregates
-│   │   ├── ValueObjects/             # Immutable value objects
-│   │   ├── Enums/                    # Domain enumerations
-│   │   └── Events/                   # Domain events
-│   │
-│   ├── MoneyMarket.Application/      # Application business rules
-│   │   ├── Common/
-│   │   │   ├── Behaviours/           # MediatR pipeline behaviors
-│   │   │   ├── Exceptions/           # Application exceptions
-│   │   │   └── Interfaces/           # Abstractions for infrastructure
-│   │   └── Features/                 # CQRS commands and queries
-│   │       ├── Auth/
-│   │       ├── Borrowers/
-│   │       ├── Lenders/
-│   │       ├── LoanApplications/
-│   │       ├── Loans/
-│   │       ├── Payments/
-│   │       └── Wallets/
-│   │
-│   ├── MoneyMarket.Infrastructure/   # External concerns
-│   │   ├── Configuration/            # Settings classes
-│   │   └── Services/                 # Service implementations
-│   │
-│   ├── MoneyMarket.Persistence/      # Data access
-│   │   ├── Configurations/           # EF Core entity configurations
-│   │   └── Interceptors/             # SaveChanges interceptors
-│   │
-│   └── MoneyMarket.API/              # Presentation layer
-│       ├── Authorization/            # Policy constants
-│       ├── Controllers/              # API controllers
-│       └── Middleware/               # Exception handling
-│
-├── client/                           # Angular Frontend
-│   └── src/
-│       ├── app/
-│       │   ├── core/                 # Services, guards, interceptors, models
-│       │   ├── layouts/              # Header, footer, main layout
-│       │   ├── features/             # Feature modules
-│       │   │   ├── auth/             # Login, register
-│       │   │   ├── public/           # Landing page
-│       │   │   ├── borrower/         # Borrower dashboard
-│       │   │   ├── lender/           # Lender dashboard
-│       │   │   └── admin/            # Admin dashboard
-│       │   └── shared/               # Shared components
-│       ├── environments/             # Environment configs
-│       └── styles.scss               # Global styles & theme
-│
-├── tests/
-│   ├── MoneyMarket.Domain.Tests/     # Domain unit tests
-│   ├── MoneyMarket.Application.Tests/# Application unit tests
-│   └── MoneyMarket.API.IntegrationTests/  # API integration tests
-│
-├── design examples/                  # UI design references
-└── screen shots/                     # Application screenshots
-```
-
-## Design Patterns & Practices
-
-| Pattern | Implementation |
-|---------|---------------|
-| **CQRS** | Separate Command and Query models with MediatR |
-| **Result Pattern** | Explicit success/failure handling without exceptions |
-| **Strongly Typed IDs** | Type-safe entity identifiers (UserId, LoanId, etc.) |
-| **Value Objects** | Immutable domain concepts (Money, EmailAddress, RiskGrade) |
-| **Domain Events** | Decoupled domain notifications |
-| **Repository Pattern** | Abstracted data access via DbContext |
-| **Unit of Work** | EF Core's DbContext transaction management |
-| **Pipeline Behaviors** | Cross-cutting concerns (logging, validation, performance) |
-
-## Getting Started
-
-### Prerequisites
-- .NET 8 SDK
-- Node.js 18+ and npm
-- Visual Studio 2022 / VS Code / Rider
-
-### Run the Backend API
-
-```bash
-# Clone the repository
-git clone https://github.com/dotnetdeveloper20xx/MoneyMarketPro.git
-cd MoneyMarketPro
-
-# Build the solution
-dotnet build
-
-# Run tests
-dotnet test
-
-# Start the API
-cd src/MoneyMarket.API
-dotnet run
-```
-
-### Run the Frontend
-
-```bash
-# Navigate to client folder
-cd client
-
-# Install dependencies
-npm install
-
-# Start development server
-ng serve
-```
-
-### Access the Application
-- **Frontend**: http://localhost:4200
-- **Backend API**: http://localhost:5133
-- **Swagger UI**: http://localhost:5133/swagger
-- **Health Check**: http://localhost:5133/api/health
-
-### Test Authentication
-
-```bash
-# Register a new user
-curl -X POST http://localhost:5133/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "john.doe@example.com",
-    "password": "SecurePass123!",
-    "firstName": "John",
-    "lastName": "Doe"
-  }'
-
-# Login
-curl -X POST http://localhost:5133/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "john.doe@example.com",
-    "password": "SecurePass123!"
-  }'
-```
-
-## Configuration
-
-### JWT Settings (appsettings.json)
-```json
-{
-  "Jwt": {
-    "Secret": "YourSuperSecretKeyThatIsAtLeast32CharactersLong!",
-    "Issuer": "MoneyMarket.API",
-    "Audience": "MoneyMarket.Client",
-    "AccessTokenExpirationMinutes": 60,
-    "RefreshTokenExpirationDays": 7
-  }
-}
-```
-
-### Frontend Environment (environment.ts)
-```typescript
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:5133/api'
-};
-```
-
-## Testing
-
-```bash
-# Run all backend tests
-dotnet test
-
-# Run with coverage
-dotnet test --collect:"XPlat Code Coverage"
-
-# Run specific test project
-dotnet test tests/MoneyMarket.Domain.Tests
-
-# Run frontend tests
-cd client && ng test
-```
-
-**Test Coverage:**
-- 32 Domain unit tests (Value Objects, Entities, Result pattern)
-- 1 API integration test (Health endpoint)
-
-## Key Implementation Highlights
-
-### Strongly Typed IDs
-```csharp
-public readonly record struct UserId(Guid Value) : IStronglyTypedId<Guid>
-{
-    public static UserId New() => new(Guid.NewGuid());
-    public static UserId From(Guid value) => new(value);
-}
-```
-
-### Result Pattern
-```csharp
-public Result<Loan> ApproveLoan(Money amount, InterestRate rate)
-{
-    if (Status != LoanStatus.UnderReview)
-        return Result.Failure<Loan>(DomainErrors.Loan.InvalidStatus);
-
-    var loan = Loan.Create(this, amount, rate);
-    return Result.Success(loan);
-}
-```
-
-### Value Objects
-```csharp
-public sealed class Money : ValueObject
-{
-    public decimal Amount { get; }
-    public string Currency { get; }
-
-    public static Money operator +(Money a, Money b) =>
-        new(a.Amount + b.Amount, a.Currency);
-}
-```
-
-### Angular Auth Service with Signals
-```typescript
-@Injectable({ providedIn: 'root' })
-export class AuthService {
-  private accessToken = signal<string | null>(null);
-  private currentUserSignal = signal<User | null>(null);
-
-  readonly isAuthenticated = computed(() => !!this.accessToken());
-  readonly currentUser = computed(() => this.currentUserSignal());
-  readonly isBorrower = computed(() => this.userRoles().includes('Borrower'));
-}
-```
-
-## License
-
-This project is licensed under the MIT License.
+MoneyMarket Pro is a **production-ready Peer-to-Peer Lending Marketplace** that connects borrowers seeking personal loans with investors looking for attractive returns. Built with enterprise-grade architecture, this platform demonstrates what's possible when cutting-edge technology meets financial innovation.
 
 ---
 
-Built with .NET 8 | Angular 17 | Clean Architecture | Domain-Driven Design
+## See It In Action
+
+### Professional Landing Experience
+![Landing Page](screen%20shots/1.png)
+
+A clean, modern landing page that builds trust and guides users through the platform's value proposition. Designed with conversion optimization in mind.
+
+### Seamless User Registration
+![Registration](screen%20shots/2.png)
+
+Frictionless onboarding with role-based registration. Users can join as borrowers seeking loans or lenders looking to invest.
+
+### Borrower Dashboard
+![Borrower Dashboard](screen%20shots/3.png)
+
+Intuitive dashboard showing wallet balance, active loans, upcoming payments, and quick actions. Everything a borrower needs at a glance.
+
+### Smart Loan Application
+![Loan Application](screen%20shots/4.png)
+
+Multi-step wizard that guides borrowers through the application process with real-time validation and clear progress indicators.
+
+### Application Review
+![Application Details](screen%20shots/5.png)
+
+Comprehensive application summary with all details organized for easy review before submission.
+
+### My Applications Tracking
+![Applications List](screen%20shots/6.png)
+
+Track all loan applications with status indicators, amounts, and quick access to details.
+
+### Active Loans Management
+![Loans List](screen%20shots/7.png)
+
+Monitor active loans with payment schedules, remaining balances, and repayment progress visualization.
+
+### Detailed Loan View
+![Loan Details](screen%20shots/8.png)
+
+Complete loan information including payment history, upcoming payments, and full amortization schedule.
+
+### Digital Wallet
+![Wallet](screen%20shots/9.png)
+
+Secure wallet management with deposit, withdrawal, and complete transaction history.
+
+### Lender Investment Marketplace
+![Marketplace](screen%20shots/10.png)
+
+Browse available loans with powerful filters for amount, interest rate, risk grade, and term. Make informed investment decisions.
+
+### Investment Analysis
+![Investment Details](screen%20shots/11.png)
+
+Deep dive into loan opportunities with borrower profiles, risk assessments, and projected returns.
+
+### Admin Application Queue
+![Admin Queue](screen%20shots/12.png)
+
+Efficient workflow for reviewing and processing loan applications with bulk actions and smart filtering.
+
+### Admin User Management
+![User Management](screen%20shots/13.png)
+
+Complete user administration with role management, status controls, and activity tracking.
+
+### Admin Loans Overview
+![Loans Management](screen%20shots/14.png)
+
+Platform-wide loan monitoring with performance metrics, default tracking, and comprehensive reporting.
+
+---
+
+## Why Choose This Platform?
+
+### For Business Stakeholders
+
+| Benefit | Description |
+|---------|-------------|
+| **Reduced Time-to-Market** | Production-ready codebase that can be customized and deployed quickly |
+| **Scalable Architecture** | Built to handle growth from hundreds to millions of users |
+| **Regulatory Ready** | Designed with financial compliance patterns in mind |
+| **Lower Development Costs** | Solid foundation reduces custom development time by 60-70% |
+| **Modern User Experience** | Halifax Bank-inspired design that users trust |
+
+### For Technical Teams
+
+| Feature | Technology |
+|---------|------------|
+| **Clean Architecture** | Maintainable, testable, and adaptable codebase |
+| **CQRS Pattern** | Optimized read/write operations for high performance |
+| **Domain-Driven Design** | Business logic that speaks your language |
+| **Microservices Ready** | Modular design supports future scaling |
+| **Comprehensive Testing** | 33+ automated tests ensure reliability |
+
+---
+
+## Technical Excellence
+
+### Backend (.NET 8)
+- **ASP.NET Core Web API** with Swagger documentation
+- **JWT Authentication** with secure refresh token rotation
+- **Entity Framework Core 8** with optimized queries
+- **MediatR** for clean command/query separation
+- **FluentValidation** for robust input validation
+- **BCrypt** password hashing for security
+
+### Frontend (Angular 17+)
+- **Standalone Components** for optimal bundle sizes
+- **Angular Material** for professional UI
+- **Reactive Forms** with real-time validation
+- **Angular Signals** for efficient state management
+- **Lazy Loading** for fast initial load times
+- **Responsive Design** for all devices
+
+### Architecture Highlights
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         Angular SPA                             │
+│              Material UI • Signals • Lazy Loading               │
+├─────────────────────────────────────────────────────────────────┤
+│                        REST API Layer                           │
+│              Controllers • Middleware • Auth                    │
+├─────────────────────────────────────────────────────────────────┤
+│                      Application Layer                          │
+│              CQRS • Handlers • Validators                       │
+├─────────────────────────────────────────────────────────────────┤
+│                        Domain Layer                             │
+│           Entities • Value Objects • Business Rules             │
+├─────────────────────────────────────────────────────────────────┤
+│                    Infrastructure Layer                         │
+│              EF Core • Repositories • Services                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Complete Feature Set
+
+### User Management
+- Multi-role support (Borrower, Lender, Admin, CRM, Support)
+- Secure authentication with JWT tokens
+- Profile management with KYC verification workflow
+- Role-based access control throughout the platform
+
+### Borrower Features
+- Loan application wizard with smart validation
+- Real-time application status tracking
+- Payment schedule management
+- Digital wallet with deposit/withdrawal
+- Complete transaction history
+
+### Lender Features
+- Investment marketplace with advanced filters
+- Portfolio management dashboard
+- ROI tracking and projections
+- Risk-graded investment options (A through E)
+- Automated interest distribution
+
+### Administration
+- Application review and approval workflow
+- User management and role assignment
+- Platform-wide loan monitoring
+- Default tracking and reporting
+- Performance analytics
+
+---
+
+## Quick Start
+
+### Prerequisites
+- .NET 8 SDK
+- Node.js 18+
+- Visual Studio 2022 / VS Code
+
+### Run the Platform
+
+```bash
+# Clone and build
+git clone https://github.com/dotnetdeveloper20xx/MoneyMarketPro.git
+cd MoneyMarketPro
+dotnet build
+
+# Start Backend (Terminal 1)
+cd src/MoneyMarket.API
+dotnet run
+
+# Start Frontend (Terminal 2)
+cd client
+npm install
+npm start
+```
+
+### Access Points
+- **Application**: http://localhost:4200
+- **API Documentation**: http://localhost:5133/swagger
+
+### Demo Accounts
+| Role | Email | Password |
+|------|-------|----------|
+| Borrower | john.smith@example.com | Password123! |
+| Lender | david.investor@example.com | Password123! |
+| Admin | admin@moneymarket.com | Password123! |
+
+---
+
+## About the Developer
+
+I'm a **Senior Full-Stack Developer** with extensive experience in:
+
+- **Backend Development**: .NET Core/8, C#, Entity Framework, SQL Server, PostgreSQL
+- **Frontend Development**: Angular, React, TypeScript, Material UI
+- **Architecture**: Clean Architecture, DDD, CQRS, Microservices
+- **Cloud & DevOps**: Azure, AWS, Docker, CI/CD pipelines
+- **Financial Technology**: Payment systems, lending platforms, trading applications
+
+### What I Bring to Your Project
+
+| Strength | Description |
+|----------|-------------|
+| **Full-Stack Expertise** | End-to-end development from database to UI |
+| **Enterprise Experience** | Built systems handling millions of transactions |
+| **Clean Code Focus** | Maintainable, testable, well-documented code |
+| **Fast Delivery** | Efficient development with quality assurance |
+| **Clear Communication** | Regular updates and transparent progress |
+
+---
+
+## Available for Hire
+
+**I'm currently available for flexible-hours contract work.**
+
+Whether you need:
+- A complete application built from scratch
+- An existing system modernized or enhanced
+- Technical consultation and architecture review
+- Team augmentation for your development projects
+
+I can adapt to your schedule and timezone requirements.
+
+### Let's Connect
+
+- **GitHub**: [github.com/dotnetdeveloper20xx](https://github.com/dotnetdeveloper20xx)
+- **Portfolio**: This repository demonstrates my capabilities
+
+**Ready to discuss your project? Reach out and let's build something great together.**
+
+---
+
+## License
+
+This project is available under the MIT License for demonstration and educational purposes.
+
+---
+
+*Built with .NET 8 • Angular 17 • Clean Architecture • Domain-Driven Design*
