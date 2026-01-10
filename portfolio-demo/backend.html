@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Architecture | MoneyMarketPro - Faz Ahmed</title>
+    <meta name="description" content="Deep dive into the backend architecture of MoneyMarketPro - a P2P lending platform built with Clean Architecture, DDD, and CQRS patterns.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-coins"></i>
+                <span>MoneyMarketPro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="backend.html" class="active">Backend</a>
+                <a href="frontend.html">Frontend</a>
+            </div>
+            <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-badge">
+                <i class="fas fa-code"></i>
+                <span>Developed by Faz Ahmed</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-compact">
+        <div class="container">
+            <div class="demo-badge">
+                <i class="fas fa-flask"></i>
+                Portfolio Demo - Technical Deep Dive
+            </div>
+            <h1>Backend Architecture</h1>
+            <p class="hero-subtitle">
+                Enterprise-grade .NET 8 API built with Clean Architecture, Domain-Driven Design,
+                and CQRS patterns - demonstrating production-ready software engineering practices.
+            </p>
+            <div class="tech-badges">
+                <span class="badge"><i class="fab fa-microsoft"></i> .NET 8</span>
+                <span class="badge"><i class="fas fa-database"></i> EF Core 8</span>
+                <span class="badge"><i class="fas fa-layer-group"></i> Clean Architecture</span>
+                <span class="badge"><i class="fas fa-cubes"></i> DDD</span>
+                <span class="badge"><i class="fas fa-code-branch"></i> CQRS</span>
+                <span class="badge"><i class="fas fa-shield-alt"></i> JWT Auth</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Architecture Overview -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div>
+                        <h2>Clean Architecture</h2>
+                        <p>Strict separation of concerns with dependency inversion</p>
+                    </div>
+                </div>
+
+                <div class="architecture-diagram">
+                    <div class="arch-layer arch-api">
+                        <div class="arch-layer-header">
+                            <i class="fas fa-globe"></i>
+                            <span>API Layer</span>
+                        </div>
+                        <p>Controllers, Middleware, Swagger</p>
+                    </div>
+                    <div class="arch-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <div class="arch-layer arch-application">
+                        <div class="arch-layer-header">
+                            <i class="fas fa-cogs"></i>
+                            <span>Application Layer</span>
+                        </div>
+                        <p>CQRS Handlers, Validators, DTOs</p>
+                    </div>
+                    <div class="arch-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <div class="arch-layer arch-domain">
+                        <div class="arch-layer-header">
+                            <i class="fas fa-gem"></i>
+                            <span>Domain Layer</span>
+                        </div>
+                        <p>Entities, Value Objects, Events</p>
+                    </div>
+                    <div class="arch-side-layers">
+                        <div class="arch-layer arch-infrastructure">
+                            <div class="arch-layer-header">
+                                <i class="fas fa-plug"></i>
+                                <span>Infrastructure</span>
+                            </div>
+                            <p>Auth, Email, External Services</p>
+                        </div>
+                        <div class="arch-layer arch-persistence">
+                            <div class="arch-layer-header">
+                                <i class="fas fa-database"></i>
+                                <span>Persistence</span>
+                            </div>
+                            <p>EF Core, DbContext, Configs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4><i class="fas fa-lightbulb"></i> Why This Matters</h4>
+                    <p>
+                        Clean Architecture ensures the business logic (Domain) remains isolated and testable,
+                        independent of frameworks, databases, or external services. Changes to the UI or database
+                        don't ripple through the codebase - a critical requirement for maintainable enterprise systems.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Domain-Driven Design -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div>
+                        <h2>Domain-Driven Design</h2>
+                        <p>Rich domain model with encapsulated business logic</p>
+                    </div>
+                </div>
+
+                <!-- Aggregate Root -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-crown"></i> Aggregate Root Pattern</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Domain/Common/AggregateRoot.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        Aggregate roots serve as the entry point for all domain operations, ensuring consistency
+                        boundaries and enabling domain event publishing for eventual consistency across bounded contexts.
+                    </p>
+                    <pre><code class="language-csharp">public abstract class AggregateRoot&lt;TId&gt; : Entity&lt;TId&gt;, IHasDomainEvents
+    where TId : notnull
+{
+    private readonly List&lt;IDomainEvent&gt; _domainEvents = new();
+
+    public IReadOnlyCollection&lt;IDomainEvent&gt; DomainEvents => _domainEvents.AsReadOnly();
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
+    }
+}</code></pre>
+                </div>
+
+                <!-- Value Object -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-gem"></i> Value Object Pattern</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Domain/ValueObjects/Money.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        Value objects encapsulate domain concepts with built-in validation and behavior.
+                        This Money value object ensures currency consistency and provides type-safe arithmetic operations.
+                    </p>
+                    <pre><code class="language-csharp">public sealed class Money : ValueObject
+{
+    public decimal Amount { get; }
+    public string Currency { get; }
+
+    private Money(decimal amount, string currency)
+    {
+        Amount = amount;
+        Currency = currency;
+    }
+
+    public static Money Create(decimal amount, string currency = "USD")
+    {
+        if (amount < 0)
+            throw new ArgumentException("Amount cannot be negative.", nameof(amount));
+
+        return new Money(Math.Round(amount, 2), currency.ToUpperInvariant());
+    }
+
+    public Money Add(Money other)
+    {
+        EnsureSameCurrency(other);
+        return new Money(Amount + other.Amount, Currency);
+    }
+
+    public Money Subtract(Money other)
+    {
+        EnsureSameCurrency(other);
+        return new Money(Amount - other.Amount, Currency);
+    }
+
+    private void EnsureSameCurrency(Money other)
+    {
+        if (Currency != other.Currency)
+            throw new InvalidOperationException(
+                $"Cannot operate on different currencies: {Currency} vs {other.Currency}");
+    }
+
+    // Operator overloads for natural syntax
+    public static Money operator +(Money left, Money right) => left.Add(right);
+    public static Money operator -(Money left, Money right) => left.Subtract(right);
+    public static bool operator >(Money left, Money right) => left.IsGreaterThan(right);
+    public static bool operator <(Money left, Money right) => left.IsLessThan(right);
+}</code></pre>
+                </div>
+
+                <!-- Rich Domain Entity -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-building-columns"></i> Rich Domain Entity</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Domain/Entities/Loan.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        The Loan aggregate root demonstrates encapsulated business logic, domain event publishing,
+                        and the use of value objects. All state transitions are validated and tracked through domain events.
+                    </p>
+                    <pre><code class="language-csharp">public class Loan : AggregateRoot&lt;LoanId&gt;, IAuditableEntity, ISoftDeletable
+{
+    // Value Objects for type safety
+    public Money PrincipalAmount { get; private set; } = null!;
+    public InterestRate InterestRate { get; private set; } = null!;
+    public LoanTerm Term { get; private set; } = null!;
+    public RiskGrade RiskGrade { get; private set; } = null!;
+
+    // Encapsulated collections
+    private readonly List&lt;LoanFunding&gt; _fundings = new();
+    public IReadOnlyCollection&lt;LoanFunding&gt; Fundings => _fundings.AsReadOnly();
+
+    // Business logic with Result pattern
+    public Result&lt;LoanFunding&gt; AddFunding(LenderProfileId lenderProfileId, Money amount)
+    {
+        if (Status != LoanStatus.PendingFunding && Status != LoanStatus.PartiallyFunded)
+            return Result.Failure&lt;LoanFunding&gt;(DomainErrors.Loan.NotPendingFunding);
+
+        if (DateTime.UtcNow > FundingDeadline)
+            return Result.Failure&lt;LoanFunding&gt;(DomainErrors.Loan.FundingExpired);
+
+        var remainingAmount = PrincipalAmount.Subtract(FundedAmount);
+        if (amount > remainingAmount)
+            return Result.Failure&lt;LoanFunding&gt;(DomainErrors.Loan.OverFunded);
+
+        var funding = LoanFunding.Create(Id, lenderProfileId, amount, InterestRate);
+        _fundings.Add(funding);
+        FundedAmount = FundedAmount.Add(amount);
+
+        // State transition with domain event
+        if (FundedAmount >= PrincipalAmount)
+        {
+            Status = LoanStatus.FullyFunded;
+            FullyFundedAt = DateTime.UtcNow;
+            RaiseDomainEvent(new LoanFullyFundedEvent(Id));
+        }
+
+        RaiseDomainEvent(new LoanFundingReceivedEvent(Id, lenderProfileId, amount, FundingPercentage));
+        return Result.Success(funding);
+    }
+}</code></pre>
+                </div>
+
+                <!-- Result Pattern -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-railway"></i> Result Pattern (Railway-Oriented Programming)</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Domain/Common/Result.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        The Result pattern provides explicit error handling without exceptions, enabling
+                        composable operations and clear success/failure paths throughout the application.
+                    </p>
+                    <pre><code class="language-csharp">public class Result
+{
+    public bool IsSuccess { get; }
+    public bool IsFailure => !IsSuccess;
+    public Error Error { get; }
+
+    protected Result(bool isSuccess, Error error)
+    {
+        if (isSuccess && error != Error.None)
+            throw new InvalidOperationException("Success result cannot have an error.");
+
+        if (!isSuccess && error == Error.None)
+            throw new InvalidOperationException("Failure result must have an error.");
+
+        IsSuccess = isSuccess;
+        Error = error;
+    }
+
+    public static Result Success() => new(true, Error.None);
+    public static Result Failure(Error error) => new(false, error);
+    public static Result&lt;TValue&gt; Success&lt;TValue&gt;(TValue value) => new(value, true, Error.None);
+    public static Result&lt;TValue&gt; Failure&lt;TValue&gt;(Error error) => new(default!, false, error);
+}
+
+public class Result&lt;TValue&gt; : Result
+{
+    private readonly TValue _value;
+
+    public TValue Value => IsSuccess
+        ? _value
+        : throw new InvalidOperationException("Cannot access value of a failed result.");
+
+    // Implicit conversion enables clean return statements
+    public static implicit operator Result&lt;TValue&gt;(TValue value) => Success(value);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- CQRS Pattern -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <div>
+                        <h2>CQRS with MediatR</h2>
+                        <p>Command Query Responsibility Segregation for scalable request handling</p>
+                    </div>
+                </div>
+
+                <div class="cqrs-diagram">
+                    <div class="cqrs-flow">
+                        <div class="cqrs-box cqrs-request">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Request</span>
+                        </div>
+                        <i class="fas fa-arrow-right cqrs-arrow"></i>
+                        <div class="cqrs-box cqrs-pipeline">
+                            <i class="fas fa-filter"></i>
+                            <span>Pipeline</span>
+                            <small>Validation, Logging, Performance</small>
+                        </div>
+                        <i class="fas fa-arrow-right cqrs-arrow"></i>
+                        <div class="cqrs-box cqrs-handler">
+                            <i class="fas fa-cog"></i>
+                            <span>Handler</span>
+                        </div>
+                        <i class="fas fa-arrow-right cqrs-arrow"></i>
+                        <div class="cqrs-box cqrs-result">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Result&lt;T&gt;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Validation Pipeline -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-shield-alt"></i> Validation Pipeline Behaviour</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Application/Common/Behaviours/ValidationBehaviour.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        Cross-cutting validation automatically executes all registered FluentValidation validators
+                        before the handler processes any request. This ensures consistent validation across all commands and queries.
+                    </p>
+                    <pre><code class="language-csharp">public class ValidationBehaviour&lt;TRequest, TResponse&gt; : IPipelineBehavior&lt;TRequest, TResponse&gt;
+    where TRequest : notnull
+{
+    private readonly IEnumerable&lt;IValidator&lt;TRequest&gt;&gt; _validators;
+
+    public ValidationBehaviour(IEnumerable&lt;IValidator&lt;TRequest&gt;&gt; validators)
+    {
+        _validators = validators;
+    }
+
+    public async Task&lt;TResponse&gt; Handle(
+        TRequest request,
+        RequestHandlerDelegate&lt;TResponse&gt; next,
+        CancellationToken cancellationToken)
+    {
+        if (!_validators.Any())
+            return await next();
+
+        var context = new ValidationContext&lt;TRequest&gt;(request);
+
+        // Run all validators in parallel
+        var validationResults = await Task.WhenAll(
+            _validators.Select(v => v.ValidateAsync(context, cancellationToken)));
+
+        var failures = validationResults
+            .SelectMany(r => r.Errors)
+            .Where(f => f != null)
+            .ToList();
+
+        if (failures.Count != 0)
+            throw new ValidationException(failures);
+
+        return await next();
+    }
+}</code></pre>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">CQRS Handlers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Pipeline Behaviours</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Feature Modules</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Async/Await</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Layer -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div>
+                        <h2>RESTful API Design</h2>
+                        <p>Clean controller patterns with consistent response handling</p>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-layer-group"></i> Base Controller with Result Handling</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /API/Controllers/ApiControllerBase.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        A base controller provides consistent MediatR integration and Result-to-HTTP response
+                        mapping, ensuring uniform error responses across all API endpoints.
+                    </p>
+                    <pre><code class="language-csharp">[ApiController]
+[Route("api/[controller]")]
+public abstract class ApiControllerBase : ControllerBase
+{
+    private ISender? _mediator;
+
+    protected ISender Mediator => _mediator ??=
+        HttpContext.RequestServices.GetRequiredService&lt;ISender&gt;();
+
+    protected IActionResult HandleResult&lt;T&gt;(Result&lt;T&gt; result)
+    {
+        if (result.IsSuccess)
+            return Ok(result.Value);
+
+        return HandleError(result.Error);
+    }
+
+    protected IActionResult HandleCreatedResult&lt;T&gt;(
+        Result&lt;T&gt; result,
+        string routeName,
+        Func&lt;T, object&gt; routeValues)
+    {
+        if (result.IsSuccess)
+            return CreatedAtRoute(routeName, routeValues(result.Value), result.Value);
+
+        return HandleError(result.Error);
+    }
+
+    private IActionResult HandleError(Error error)
+    {
+        return error.Code switch
+        {
+            var code when code.Contains("NotFound") => NotFound(new { error.Code, error.Message }),
+            var code when code.Contains("Unauthorized") => Unauthorized(new { error.Code, error.Message }),
+            var code when code.Contains("Forbidden") => Forbid(),
+            var code when code.Contains("Conflict") => Conflict(new { error.Code, error.Message }),
+            _ => BadRequest(new { error.Code, error.Message })
+        };
+    }
+}</code></pre>
+                </div>
+
+                <div class="api-endpoints">
+                    <h3><i class="fas fa-route"></i> API Endpoints</h3>
+                    <div class="endpoint-grid">
+                        <div class="endpoint-group">
+                            <h4><i class="fas fa-lock"></i> Authentication</h4>
+                            <div class="endpoint"><span class="method post">POST</span> /api/auth/register</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/auth/login</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/auth/refresh-token</div>
+                            <div class="endpoint"><span class="method get">GET</span> /api/auth/me</div>
+                        </div>
+                        <div class="endpoint-group">
+                            <h4><i class="fas fa-file-invoice-dollar"></i> Loans</h4>
+                            <div class="endpoint"><span class="method get">GET</span> /api/loans/marketplace</div>
+                            <div class="endpoint"><span class="method get">GET</span> /api/loans/:id</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/loans/:id/fund</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/loans/:id/disburse</div>
+                        </div>
+                        <div class="endpoint-group">
+                            <h4><i class="fas fa-clipboard-list"></i> Applications</h4>
+                            <div class="endpoint"><span class="method post">POST</span> /api/loanapplications</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/loanapplications/:id/submit</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/loanapplications/:id/review</div>
+                        </div>
+                        <div class="endpoint-group">
+                            <h4><i class="fas fa-wallet"></i> Wallets</h4>
+                            <div class="endpoint"><span class="method get">GET</span> /api/wallets</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/wallets/deposit</div>
+                            <div class="endpoint"><span class="method post">POST</span> /api/wallets/withdraw</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Layer -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div>
+                        <h2>Data Layer Excellence</h2>
+                        <p>EF Core with interceptors for automatic auditing and soft delete</p>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-history"></i> Automatic Audit Trail</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Persistence/Interceptors/AuditableEntityInterceptor.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        EF Core interceptors automatically populate audit fields (CreatedAt, CreatedBy, UpdatedAt, UpdatedBy)
+                        on every save operation, ensuring complete audit trails without manual intervention.
+                    </p>
+                    <pre><code class="language-csharp">public class AuditableEntityInterceptor : SaveChangesInterceptor
+{
+    private readonly ICurrentUserService _currentUserService;
+    private readonly IDateTimeProvider _dateTimeProvider;
+
+    public override ValueTask&lt;InterceptionResult&lt;int&gt;&gt; SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult&lt;int&gt; result,
+        CancellationToken cancellationToken = default)
+    {
+        UpdateEntities(eventData.Context);
+        return base.SavingChangesAsync(eventData, result, cancellationToken);
+    }
+
+    private void UpdateEntities(DbContext? context)
+    {
+        if (context == null) return;
+
+        foreach (var entry in context.ChangeTracker.Entries&lt;IAuditableEntity&gt;())
+        {
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedBy = _currentUserService.UserId;
+                entry.Entity.CreatedAt = _dateTimeProvider.UtcNow;
+            }
+
+            if (entry.State is EntityState.Added or EntityState.Modified ||
+                entry.HasChangedOwnedEntities())
+            {
+                entry.Entity.UpdatedBy = _currentUserService.UserId;
+                entry.Entity.UpdatedAt = _dateTimeProvider.UtcNow;
+            }
+        }
+    }
+}</code></pre>
+                </div>
+
+                <div class="interceptors-grid">
+                    <div class="interceptor-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Auditable Entity</h4>
+                        <p>Auto-tracks CreatedAt, CreatedBy, UpdatedAt, UpdatedBy</p>
+                    </div>
+                    <div class="interceptor-card">
+                        <i class="fas fa-trash-restore"></i>
+                        <h4>Soft Delete</h4>
+                        <p>Global query filter for IsDeleted entities</p>
+                    </div>
+                    <div class="interceptor-card">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Domain Events</h4>
+                        <p>Dispatches domain events post-save</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h2>Security Implementation</h2>
+                        <p>JWT authentication with role-based authorization</p>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-key"></i> JWT Token Service</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /Infrastructure/Services/JwtTokenService.cs
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        Secure JWT generation with role claims, refresh token rotation, and configurable expiration.
+                        Tokens include user roles and profile IDs for authorization without database lookups.
+                    </p>
+                    <pre><code class="language-csharp">public class JwtTokenService : IJwtTokenService
+{
+    private readonly JwtSettings _jwtSettings;
+    private readonly IDateTimeProvider _dateTimeProvider;
+
+    public string GenerateAccessToken(User user)
+    {
+        var securityKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(_jwtSettings.Secret));
+
+        var credentials = new SigningCredentials(
+            securityKey, SecurityAlgorithms.HmacSha256);
+
+        var claims = new List&lt;Claim&gt;
+        {
+            new(JwtRegisteredClaimNames.Sub, user.Id.Value.ToString()),
+            new(JwtRegisteredClaimNames.Email, user.Email.Value),
+            new(JwtRegisteredClaimNames.GivenName, user.FirstName),
+            new(JwtRegisteredClaimNames.FamilyName, user.LastName),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new("uid", user.Id.Value.ToString())
+        };
+
+        // Add roles for authorization
+        foreach (var role in user.Roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+        }
+
+        // Add profile IDs for quick access
+        if (user.BorrowerProfile != null)
+            claims.Add(new Claim("borrower_profile_id", user.BorrowerProfile.Id.Value.ToString()));
+
+        if (user.LenderProfile != null)
+            claims.Add(new Claim("lender_profile_id", user.LenderProfile.Id.Value.ToString()));
+
+        var token = new JwtSecurityToken(
+            issuer: _jwtSettings.Issuer,
+            audience: _jwtSettings.Audience,
+            claims: claims,
+            notBefore: _dateTimeProvider.UtcNow,
+            expires: GetAccessTokenExpiration(),
+            signingCredentials: credentials);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public string GenerateRefreshToken()
+    {
+        var randomBytes = new byte[64];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomBytes);
+        return Convert.ToBase64String(randomBytes);
+    }
+}</code></pre>
+                </div>
+
+                <div class="security-features">
+                    <div class="security-card">
+                        <i class="fas fa-users-cog"></i>
+                        <h4>Role-Based Authorization</h4>
+                        <ul>
+                            <li>Borrower - Apply for loans, manage payments</li>
+                            <li>Lender - Invest in loans, track returns</li>
+                            <li>Admin - Full platform access</li>
+                            <li>CRM - Application review</li>
+                            <li>Support - User assistance</li>
+                        </ul>
+                    </div>
+                    <div class="security-card">
+                        <i class="fas fa-lock"></i>
+                        <h4>Security Features</h4>
+                        <ul>
+                            <li>BCrypt password hashing</li>
+                            <li>Refresh token rotation</li>
+                            <li>Short-lived access tokens</li>
+                            <li>HTTPS enforcement</li>
+                            <li>CORS policy configuration</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Stack Summary -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div>
+                        <h2>Technology Stack</h2>
+                        <p>Production-ready technologies and packages</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack-grid">
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-microsoft"></i></div>
+                        <h4>.NET 8</h4>
+                        <p>Latest LTS release with performance improvements</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-database"></i></div>
+                        <h4>EF Core 8</h4>
+                        <p>Modern ORM with interceptors and configurations</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h4>MediatR 12</h4>
+                        <p>CQRS pattern with pipeline behaviors</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-check-double"></i></div>
+                        <h4>FluentValidation</h4>
+                        <p>Declarative validation with async support</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-key"></i></div>
+                        <h4>JWT Bearer</h4>
+                        <p>Stateless authentication with refresh tokens</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-book"></i></div>
+                        <h4>Swagger/OpenAPI</h4>
+                        <p>Interactive API documentation</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-coins"></i> MoneyMarketPro</h3>
+                    <p>P2P Lending Platform - Portfolio Demonstration</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="backend.html">Backend</a>
+                    <a href="frontend.html">Frontend</a>
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank">Portfolio</a>
+                </div>
+                <div class="footer-developer">
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        dotnetdeveloper.co.uk
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Faz Ahmed. All rights reserved.
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    This is a sanitized demo version. Architecture and patterns by Faz Ahmed.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+</body>
+</html>

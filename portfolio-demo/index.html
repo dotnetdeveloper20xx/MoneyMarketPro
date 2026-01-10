@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMarketPro | P2P Lending Platform - Portfolio Demo by Faz Ahmed</title>
+    <meta name="description" content="MoneyMarketPro - A full-stack P2P lending platform built with .NET 8, Angular 17+, Clean Architecture, and DDD. Portfolio demonstration by Faz Ahmed.">
+    <meta name="author" content="Faz Ahmed">
+    <meta name="keywords" content=".NET Developer, Full Stack Developer, Angular, Clean Architecture, DDD, CQRS, P2P Lending">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MoneyMarketPro - Portfolio Demo by Faz Ahmed">
+    <meta property="og:description" content="Enterprise-grade P2P lending platform showcasing Clean Architecture, DDD, and modern Angular development.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dotnetdeveloper.co.uk">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-coins"></i>
+                <span>MoneyMarketPro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="backend.html">Backend</a>
+                <a href="frontend.html">Frontend</a>
+            </div>
+            <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-badge">
+                <i class="fas fa-code"></i>
+                <span>Developed by Faz Ahmed</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-main">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="demo-badge-large">
+                    <i class="fas fa-flask"></i>
+                    <span>Portfolio Demonstration</span>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="title-icon"><i class="fas fa-coins"></i></span>
+                    MoneyMarketPro
+                </h1>
+
+                <p class="hero-tagline">
+                    Enterprise P2P Lending Platform
+                </p>
+
+                <p class="hero-description">
+                    A full-stack financial technology application connecting borrowers with investors,
+                    built with enterprise-grade architecture and modern development practices.
+                </p>
+
+                <div class="hero-developer">
+                    <div class="developer-info">
+                        <span class="developer-label">Architecture & Development by</span>
+                        <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-name">
+                            Faz Ahmed
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-tech-stack">
+                    <div class="tech-badge">
+                        <i class="fab fa-microsoft"></i>
+                        <span>.NET 8</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fab fa-angular"></i>
+                        <span>Angular 17+</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-database"></i>
+                        <span>EF Core</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Clean Architecture</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-cubes"></i>
+                        <span>DDD</span>
+                    </div>
+                    <div class="tech-badge">
+                        <i class="fas fa-code-branch"></i>
+                        <span>CQRS</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="backend.html" class="btn btn-primary">
+                        <i class="fas fa-server"></i>
+                        Explore Backend
+                    </a>
+                    <a href="frontend.html" class="btn btn-secondary">
+                        <i class="fas fa-desktop"></i>
+                        View Frontend
+                    </a>
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-globe"></i>
+                        Full Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Disclaimer -->
+    <section class="disclaimer-banner">
+        <div class="container">
+            <div class="disclaimer-content">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Portfolio Demonstration:</strong>
+                    This is a sanitized version of a production application. Sensitive business logic and client data
+                    have been removed in accordance with confidentiality agreements. The technical architecture, design
+                    patterns, and implementation approaches demonstrated here are the intellectual work of
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank">Faz Ahmed</a>.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+
+            <!-- About the Project -->
+            <section class="content-section">
+                <div class="section-header centered">
+                    <div class="section-icon">
+                        <i class="fas fa-building-columns"></i>
+                    </div>
+                    <div>
+                        <h2>About MoneyMarketPro</h2>
+                        <p>Connecting borrowers with investors through technology</p>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <p class="about-lead">
+                        MoneyMarketPro is a sophisticated Peer-to-Peer (P2P) lending platform that democratizes
+                        access to financial services. The platform connects borrowers seeking personal loans with
+                        investors looking for attractive returns, facilitating the entire loan lifecycle from
+                        application through repayment.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <h4>For Borrowers</h4>
+                            <p>
+                                Submit loan applications, receive competitive rates from multiple investors,
+                                and manage repayments through an intuitive digital wallet system.
+                            </p>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-chart-pie"></i>
+                            <h4>For Investors</h4>
+                            <p>
+                                Browse a marketplace of vetted loan opportunities, build diversified portfolios
+                                with risk-graded options, and track investment performance in real-time.
+                            </p>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>For Administrators</h4>
+                            <p>
+                                Review and approve applications, manage platform users, monitor loan health,
+                                and ensure regulatory compliance through comprehensive admin tools.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Highlights -->
+            <section class="content-section highlights-section">
+                <div class="section-header centered">
+                    <div class="section-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <h2>Technical Highlights</h2>
+                        <p>Enterprise-grade patterns demonstrating senior-level expertise</p>
+                    </div>
+                </div>
+
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h3>Clean Architecture</h3>
+                        <p>
+                            5-layer separation with strict dependency inversion. Business logic remains isolated
+                            from frameworks, databases, and external services - ensuring long-term maintainability.
+                        </p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <h3>Domain-Driven Design</h3>
+                        <p>
+                            Rich domain model with 11 entities, 8 value objects, aggregate roots with domain events,
+                            and encapsulated business logic - representing true domain expertise.
+                        </p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h3>CQRS with MediatR</h3>
+                        <p>
+                            Command Query Responsibility Segregation with 20+ handlers, pipeline behaviors
+                            for validation, logging, and performance monitoring - enabling scalable request handling.
+                        </p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Angular Signals</h3>
+                        <p>
+                            Modern state management using Angular's new Signals API for fine-grained reactivity,
+                            automatic change detection optimization, and clean component architecture.
+                        </p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Enterprise Security</h3>
+                        <p>
+                            JWT authentication with refresh token rotation, BCrypt password hashing,
+                            role-based authorization policies, and route guards protecting all sensitive operations.
+                        </p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">
+                            <i class="fas fa-railway"></i>
+                        </div>
+                        <h3>Result Pattern</h3>
+                        <p>
+                            Railway-oriented programming with explicit success/failure paths, eliminating exception-based
+                            flow control and enabling composable, predictable error handling.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Cards -->
+            <section class="content-section">
+                <div class="section-header centered">
+                    <div class="section-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h2>Explore the Architecture</h2>
+                        <p>Deep dive into the technical implementation</p>
+                    </div>
+                </div>
+
+                <div class="nav-cards">
+                    <a href="backend.html" class="nav-card backend-card">
+                        <div class="nav-card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="nav-card-content">
+                            <h3>Backend Architecture</h3>
+                            <p>
+                                Explore the .NET 8 backend featuring Clean Architecture, Domain-Driven Design,
+                                CQRS with MediatR, Entity Framework Core interceptors, and JWT security.
+                            </p>
+                            <ul class="nav-card-highlights">
+                                <li><i class="fas fa-check"></i> Clean Architecture</li>
+                                <li><i class="fas fa-check"></i> Domain-Driven Design</li>
+                                <li><i class="fas fa-check"></i> CQRS Pattern</li>
+                                <li><i class="fas fa-check"></i> Result Pattern</li>
+                            </ul>
+                        </div>
+                        <div class="nav-card-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <a href="frontend.html" class="nav-card frontend-card">
+                        <div class="nav-card-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="nav-card-content">
+                            <h3>Frontend Experience</h3>
+                            <p>
+                                Discover the Angular 17+ frontend with Signals-based state management,
+                                standalone components, Material Design, and role-based routing.
+                            </p>
+                            <ul class="nav-card-highlights">
+                                <li><i class="fas fa-check"></i> Angular Signals</li>
+                                <li><i class="fas fa-check"></i> Standalone Components</li>
+                                <li><i class="fas fa-check"></i> Route Guards</li>
+                                <li><i class="fas fa-check"></i> HTTP Interceptors</li>
+                            </ul>
+                        </div>
+                        <div class="nav-card-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- About the Developer -->
+            <section class="content-section developer-section">
+                <div class="developer-card">
+                    <div class="developer-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="developer-details">
+                        <h2>About the Developer</h2>
+                        <h3>Faz Ahmed</h3>
+                        <p class="developer-title">Full Stack .NET Developer</p>
+                        <p class="developer-bio">
+                            Experienced software engineer specializing in enterprise .NET applications,
+                            clean architecture, and modern web development. Passionate about building
+                            maintainable, scalable systems using industry best practices and proven design patterns.
+                        </p>
+                        <div class="developer-cta">
+                            <a href="https://dotnetdeveloper.co.uk" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-globe"></i>
+                                View Full Portfolio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Stack Summary -->
+            <section class="content-section">
+                <div class="section-header centered">
+                    <div class="section-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div>
+                        <h2>Technology Stack</h2>
+                        <p>Built with modern, production-ready technologies</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack-summary">
+                    <div class="stack-column">
+                        <h4><i class="fas fa-server"></i> Backend</h4>
+                        <ul>
+                            <li>.NET 8 (Latest LTS)</li>
+                            <li>ASP.NET Core Web API</li>
+                            <li>Entity Framework Core 8</li>
+                            <li>MediatR 12</li>
+                            <li>FluentValidation</li>
+                            <li>JWT Authentication</li>
+                            <li>Swagger/OpenAPI</li>
+                        </ul>
+                    </div>
+                    <div class="stack-column">
+                        <h4><i class="fas fa-desktop"></i> Frontend</h4>
+                        <ul>
+                            <li>Angular 17+</li>
+                            <li>TypeScript 5.9</li>
+                            <li>Angular Material 21</li>
+                            <li>RxJS 7.8</li>
+                            <li>Angular Signals</li>
+                            <li>SCSS</li>
+                            <li>Standalone Components</li>
+                        </ul>
+                    </div>
+                    <div class="stack-column">
+                        <h4><i class="fas fa-drafting-compass"></i> Architecture</h4>
+                        <ul>
+                            <li>Clean Architecture</li>
+                            <li>Domain-Driven Design</li>
+                            <li>CQRS Pattern</li>
+                            <li>Repository Pattern</li>
+                            <li>Result Pattern</li>
+                            <li>Value Objects</li>
+                            <li>Domain Events</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-coins"></i> MoneyMarketPro</h3>
+                    <p>P2P Lending Platform - Portfolio Demonstration</p>
+                    <p class="footer-tagline">
+                        Showcasing enterprise-grade software engineering
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="backend.html">Backend Architecture</a>
+                    <a href="frontend.html">Frontend Features</a>
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank">Full Portfolio</a>
+                </div>
+                <div class="footer-developer">
+                    <h4>Developer</h4>
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-link-large">
+                        <i class="fas fa-globe"></i>
+                        dotnetdeveloper.co.uk
+                    </a>
+                    <p>Development & Architecture by</p>
+                    <p class="footer-developer-name">Faz Ahmed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Faz Ahmed. All rights reserved.
+                </div>
+                <div class="footer-ip">
+                    The architectural design, code patterns, and technical implementation showcased in this
+                    demo were developed by Faz Ahmed (<a href="https://dotnetdeveloper.co.uk" target="_blank">dotnetdeveloper.co.uk</a>).
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <i class="fas fa-shield-alt"></i>
+                <p>
+                    <strong>Confidentiality Notice:</strong> This portfolio demonstration represents a sanitized
+                    version of a production application. Client-specific business logic, proprietary algorithms,
+                    and sensitive data have been removed in compliance with NDA and confidentiality agreements.
+                    The technical skills, patterns, and architectural approaches demonstrated are authentic
+                    representations of professional capability.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Features | MoneyMarketPro - Faz Ahmed</title>
+    <meta name="description" content="Explore the Angular 17+ frontend of MoneyMarketPro featuring Signals, standalone components, and modern state management.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-coins"></i>
+                <span>MoneyMarketPro</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="backend.html">Backend</a>
+                <a href="frontend.html" class="active">Frontend</a>
+            </div>
+            <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-badge">
+                <i class="fas fa-code"></i>
+                <span>Developed by Faz Ahmed</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-compact">
+        <div class="container">
+            <div class="demo-badge">
+                <i class="fas fa-desktop"></i>
+                Portfolio Demo - Feature Showcase
+            </div>
+            <h1>Frontend Experience</h1>
+            <p class="hero-subtitle">
+                Modern Angular 17+ SPA with Signals-based state management, standalone components,
+                role-based routing, and a polished Material Design interface.
+            </p>
+            <div class="tech-badges">
+                <span class="badge"><i class="fab fa-angular"></i> Angular 17+</span>
+                <span class="badge"><i class="fas fa-bolt"></i> Signals</span>
+                <span class="badge"><i class="fas fa-palette"></i> Material 21</span>
+                <span class="badge"><i class="fab fa-js-square"></i> TypeScript</span>
+                <span class="badge"><i class="fas fa-route"></i> Lazy Loading</span>
+                <span class="badge"><i class="fas fa-shield-alt"></i> Route Guards</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Application Overview -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h2>Three User Experiences, One Platform</h2>
+                        <p>Role-specific dashboards tailored to each user's needs</p>
+                    </div>
+                </div>
+
+                <div class="user-flows">
+                    <div class="user-flow-card borrower-card">
+                        <div class="flow-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Borrower Journey</h3>
+                        <p>Apply for personal loans and manage repayments through an intuitive dashboard</p>
+                        <ul class="flow-features">
+                            <li><i class="fas fa-check"></i> Multi-step loan application wizard</li>
+                            <li><i class="fas fa-check"></i> Real-time application status tracking</li>
+                            <li><i class="fas fa-check"></i> Payment schedule management</li>
+                            <li><i class="fas fa-check"></i> Digital wallet for easy payments</li>
+                        </ul>
+                    </div>
+                    <div class="user-flow-card lender-card">
+                        <div class="flow-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Lender/Investor Journey</h3>
+                        <p>Discover investment opportunities and grow your portfolio with diversified loans</p>
+                        <ul class="flow-features">
+                            <li><i class="fas fa-check"></i> Loan marketplace with filters</li>
+                            <li><i class="fas fa-check"></i> Risk-graded investment options</li>
+                            <li><i class="fas fa-check"></i> Portfolio performance tracking</li>
+                            <li><i class="fas fa-check"></i> Earnings and returns dashboard</li>
+                        </ul>
+                    </div>
+                    <div class="user-flow-card admin-card">
+                        <div class="flow-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Admin/CRM Journey</h3>
+                        <p>Manage the platform, review applications, and monitor system health</p>
+                        <ul class="flow-features">
+                            <li><i class="fas fa-check"></i> Application review queue</li>
+                            <li><i class="fas fa-check"></i> User management console</li>
+                            <li><i class="fas fa-check"></i> Platform analytics dashboard</li>
+                            <li><i class="fas fa-check"></i> Loan portfolio oversight</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Angular Signals -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h2>Modern State Management with Signals</h2>
+                        <p>Angular's new reactive primitives for efficient change detection</p>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-wave-square"></i> Signal-Based Auth Service</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /core/services/auth.service.ts
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        The authentication service leverages Angular Signals for reactive state management,
+                        providing computed properties that automatically update views without manual subscription handling.
+                    </p>
+                    <pre><code class="language-typescript">@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
+
+  // Signals for reactive state management
+  private accessToken = signal&lt;string | null&gt;(null);
+  private currentUserSignal = signal&lt;User | null&gt;(null);
+  private isLoadingSignal = signal&lt;boolean&gt;(false);
+
+  // Computed values - automatically update when signals change
+  readonly isAuthenticated = computed(() => !!this.accessToken());
+  readonly currentUser = computed(() => this.currentUserSignal());
+  readonly isLoading = computed(() => this.isLoadingSignal());
+  readonly userRoles = computed(() => this.currentUserSignal()?.roles ?? []);
+
+  // Role-based computed checks for UI binding
+  readonly isBorrower = computed(() => this.userRoles().includes('Borrower'));
+  readonly isLender = computed(() => this.userRoles().includes('Lender'));
+  readonly isAdmin = computed(() => this.userRoles().includes('Admin'));
+  readonly isCRM = computed(() => this.userRoles().includes('CRM'));
+  readonly isSupport = computed(() => this.userRoles().includes('Support'));
+
+  login(request: LoginRequest): Observable&lt;AuthResponse&gt; {
+    this.isLoadingSignal.set(true);
+
+    return this.http.post&lt;AuthResponse&gt;(`${this.apiUrl}/login`, request, {
+      withCredentials: true
+    }).pipe(
+      tap(response => this.handleAuthSuccess(response)),
+      catchError(error => {
+        this.isLoadingSignal.set(false);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  private handleAuthSuccess(response: AuthResponse): void {
+    const user: User = {
+      userId: response.userId,
+      email: response.email,
+      firstName: response.firstName,
+      lastName: response.lastName,
+      roles: response.roles
+    };
+
+    this.accessToken.set(response.accessToken);
+    this.currentUserSignal.set(user);
+    this.isLoadingSignal.set(false);
+
+    // Session storage for persistence (more secure than localStorage)
+    sessionStorage.setItem('mm_user', JSON.stringify(user));
+    sessionStorage.setItem('mm_token', response.accessToken);
+  }
+}</code></pre>
+                </div>
+
+                <div class="highlight-box success">
+                    <h4><i class="fas fa-rocket"></i> Why Signals?</h4>
+                    <p>
+                        Angular Signals provide fine-grained reactivity with automatic dependency tracking.
+                        Unlike Observables, they don't require subscriptions, reducing memory leaks and boilerplate.
+                        Views automatically re-render only when relevant signals change - improving performance significantly.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Route Guards -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h2>Functional Route Guards</h2>
+                        <p>Modern CanActivateFn guards for role-based access control</p>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-lock"></i> Role-Based Guards</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /core/guards/auth.guard.ts
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        Functional guards using Angular's inject() function provide type-safe route protection
+                        with intelligent redirects based on user roles.
+                    </p>
+                    <pre><code class="language-typescript">import { inject } from '@angular/core';
+import { Router, CanActivateFn } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.isAuthenticated()) {
+    return true;
+  }
+
+  router.navigate(['/login'], {
+    queryParams: { returnUrl: state.url }
+  });
+  return false;
+};
+
+export const guestGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (!authService.isAuthenticated()) {
+    return true;
+  }
+
+  // Redirect authenticated users to their role-specific dashboard
+  const roles = authService.userRoles();
+  if (roles.includes('Admin') || roles.includes('CRM')) {
+    router.navigate(['/admin']);
+  } else if (roles.includes('Lender')) {
+    router.navigate(['/lender']);
+  } else {
+    router.navigate(['/borrower']);
+  }
+  return false;
+};
+
+export const borrowerGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.isBorrower()) {
+    return true;
+  }
+
+  router.navigate(['/unauthorized']);
+  return false;
+};
+
+export const lenderGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.isLender()) {
+    return true;
+  }
+
+  router.navigate(['/unauthorized']);
+  return false;
+};</code></pre>
+                </div>
+
+                <div class="guards-grid">
+                    <div class="guard-card">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <h4>authGuard</h4>
+                        <p>Requires authentication, redirects to login with return URL</p>
+                    </div>
+                    <div class="guard-card">
+                        <i class="fas fa-user-slash"></i>
+                        <h4>guestGuard</h4>
+                        <p>For unauthenticated users only, redirects logged-in users</p>
+                    </div>
+                    <div class="guard-card">
+                        <i class="fas fa-user"></i>
+                        <h4>borrowerGuard</h4>
+                        <p>Borrower-only routes with role verification</p>
+                    </div>
+                    <div class="guard-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>lenderGuard</h4>
+                        <p>Lender-only routes with role verification</p>
+                    </div>
+                    <div class="guard-card">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>adminGuard</h4>
+                        <p>Admin/CRM access with elevated permissions</p>
+                    </div>
+                    <div class="guard-card">
+                        <i class="fas fa-users-cog"></i>
+                        <h4>roleGuard</h4>
+                        <p>Generic guard with configurable role requirements</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HTTP Interceptor -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div>
+                        <h2>HTTP Interceptor with Token Refresh</h2>
+                        <p>Automatic bearer token injection and 401 handling</p>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3><i class="fas fa-sync-alt"></i> Auth Interceptor with Refresh</h3>
+                        <span class="file-path">
+                            <i class="fas fa-file-code"></i>
+                            /core/interceptors/auth.interceptor.ts
+                        </span>
+                    </div>
+                    <p class="pattern-description">
+                        Functional HTTP interceptor that automatically attaches bearer tokens, handles 401 responses
+                        by refreshing tokens, and retries failed requests - all transparently to the application.
+                    </p>
+                    <pre><code class="language-typescript">import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { catchError, switchMap, throwError } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+
+let isRefreshing = false;
+
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+  const token = authService.getToken();
+
+  // Skip auth header for public endpoints
+  const publicEndpoints = ['/auth/login', '/auth/register', '/auth/refresh-token'];
+  const isPublicEndpoint = publicEndpoints.some(endpoint => req.url.includes(endpoint));
+
+  let authReq = req;
+
+  if (token && !isPublicEndpoint) {
+    authReq = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
+  return next(authReq).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401 && !isPublicEndpoint && !isRefreshing) {
+        isRefreshing = true;
+
+        return authService.refreshToken().pipe(
+          switchMap(() => {
+            isRefreshing = false;
+            const newToken = authService.getToken();
+            const retryReq = req.clone({
+              setHeaders: {
+                Authorization: `Bearer ${newToken}`
+              }
+            });
+            return next(retryReq);
+          }),
+          catchError(refreshError => {
+            isRefreshing = false;
+            authService.logout();
+            return throwError(() => refreshError);
+          })
+        );
+      }
+
+      return throwError(() => error);
+    })
+  );
+};</code></pre>
+                </div>
+
+                <div class="interceptor-flow">
+                    <div class="flow-step">
+                        <div class="step-icon"><i class="fas fa-paper-plane"></i></div>
+                        <div class="step-content">
+                            <h4>Request</h4>
+                            <p>Add Bearer token</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step">
+                        <div class="step-icon"><i class="fas fa-server"></i></div>
+                        <div class="step-content">
+                            <h4>API Call</h4>
+                            <p>Send to server</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step error-step">
+                        <div class="step-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="step-content">
+                            <h4>401 Error?</h4>
+                            <p>Token expired</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step">
+                        <div class="step-icon"><i class="fas fa-sync"></i></div>
+                        <div class="step-content">
+                            <h4>Refresh</h4>
+                            <p>Get new token</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-arrow-right flow-arrow"></i>
+                    <div class="flow-step success-step">
+                        <div class="step-icon"><i class="fas fa-redo"></i></div>
+                        <div class="step-content">
+                            <h4>Retry</h4>
+                            <p>Resend request</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feature Screenshots -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div>
+                        <h2>Application Screenshots</h2>
+                        <p>Visual tour of the user interface</p>
+                    </div>
+                </div>
+
+                <div class="screenshots-note">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Screenshots showcase the application with sample data for demonstration purposes.</p>
+                </div>
+
+                <div class="screenshot-grid">
+                    <!-- Borrower Screenshots -->
+                    <div class="screenshot-category">
+                        <h3><i class="fas fa-user"></i> Borrower Experience</h3>
+                        <div class="screenshot-items">
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Borrower Dashboard</span>
+                                </div>
+                                <p>Overview of active loans, wallet balance, and upcoming payments</p>
+                            </div>
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Loan Application</span>
+                                </div>
+                                <p>Multi-step wizard for loan requests with validation</p>
+                            </div>
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Digital Wallet</span>
+                                </div>
+                                <p>Deposits, withdrawals, and transaction history</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lender Screenshots -->
+                    <div class="screenshot-category">
+                        <h3><i class="fas fa-chart-line"></i> Lender Experience</h3>
+                        <div class="screenshot-items">
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-store"></i>
+                                    <span>Loan Marketplace</span>
+                                </div>
+                                <p>Browse available loans with risk grades and returns</p>
+                            </div>
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-briefcase"></i>
+                                    <span>Investment Portfolio</span>
+                                </div>
+                                <p>Track all investments and expected returns</p>
+                            </div>
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                    <span>Investment Detail</span>
+                                </div>
+                                <p>Loan details before investing with risk assessment</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Screenshots -->
+                    <div class="screenshot-category">
+                        <h3><i class="fas fa-cogs"></i> Admin Experience</h3>
+                        <div class="screenshot-items">
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>Application Queue</span>
+                                </div>
+                                <p>Review pending loan applications</p>
+                            </div>
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-users-cog"></i>
+                                    <span>User Management</span>
+                                </div>
+                                <p>Manage users, roles, and permissions</p>
+                            </div>
+                            <div class="screenshot-card">
+                                <div class="screenshot-placeholder">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <span>Analytics Dashboard</span>
+                                </div>
+                                <p>Platform metrics and performance indicators</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Component Architecture -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div>
+                        <h2>Standalone Component Architecture</h2>
+                        <p>Modern Angular without NgModules</p>
+                    </div>
+                </div>
+
+                <div class="folder-structure">
+                    <pre><code class="language-markup">src/app/
+├── app.config.ts           # Application configuration
+├── app.routes.ts           # Route definitions with lazy loading
+├── app.ts                  # Root standalone component
+│
+├── core/                   # Core functionality
+│   ├── guards/             # Route protection
+│   ├── interceptors/       # HTTP interceptors
+│   ├── models/             # TypeScript interfaces
+│   └── services/           # Singleton services
+│
+├── features/               # Feature modules
+│   ├── auth/               # Login, Register
+│   ├── borrower/           # Borrower dashboard, applications
+│   ├── lender/             # Marketplace, investments
+│   ├── admin/              # Admin panel, user management
+│   └── shared/             # Profile, settings
+│
+└── layouts/                # Layout components
+    ├── main-layout/        # Authenticated layout
+    ├── header/             # Navigation header
+    └── footer/             # Page footer</code></pre>
+                </div>
+
+                <div class="architecture-features">
+                    <div class="arch-feature">
+                        <i class="fas fa-box-open"></i>
+                        <h4>Standalone Components</h4>
+                        <p>No NgModules - each component declares its own dependencies for better tree-shaking</p>
+                    </div>
+                    <div class="arch-feature">
+                        <i class="fas fa-code-branch"></i>
+                        <h4>Lazy Loading</h4>
+                        <p>Feature routes loaded on demand, reducing initial bundle size</p>
+                    </div>
+                    <div class="arch-feature">
+                        <i class="fas fa-folder-tree"></i>
+                        <h4>Feature-Based Structure</h4>
+                        <p>Organized by user roles for clear separation and maintainability</p>
+                    </div>
+                    <div class="arch-feature">
+                        <i class="fas fa-cube"></i>
+                        <h4>Smart/Dumb Pattern</h4>
+                        <p>Container components handle logic, presentational components handle UI</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Stack -->
+            <section class="content-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div>
+                        <h2>Frontend Technology Stack</h2>
+                        <p>Modern tools for exceptional user experiences</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack-grid">
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-angular"></i></div>
+                        <h4>Angular 17+</h4>
+                        <p>Latest framework with standalone components</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Signals</h4>
+                        <p>Fine-grained reactivity for state management</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-palette"></i></div>
+                        <h4>Angular Material 21</h4>
+                        <p>Professional UI component library</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+                        <h4>TypeScript 5.9</h4>
+                        <p>Type-safe development with latest features</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fas fa-stream"></i></div>
+                        <h4>RxJS 7.8</h4>
+                        <p>Reactive extensions for async operations</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-icon"><i class="fab fa-sass"></i></div>
+                        <h4>SCSS</h4>
+                        <p>CSS preprocessor with variables and mixins</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Feature Components</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Route Guards</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">User Roles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Standalone</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-coins"></i> MoneyMarketPro</h3>
+                    <p>P2P Lending Platform - Portfolio Demonstration</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="backend.html">Backend</a>
+                    <a href="frontend.html">Frontend</a>
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank">Portfolio</a>
+                </div>
+                <div class="footer-developer">
+                    <a href="https://dotnetdeveloper.co.uk" target="_blank" class="developer-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        dotnetdeveloper.co.uk
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Faz Ahmed. All rights reserved.
+                </div>
+                <div class="disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    This is a sanitized demo version. Architecture and patterns by Faz Ahmed.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+</body>
+</html>
