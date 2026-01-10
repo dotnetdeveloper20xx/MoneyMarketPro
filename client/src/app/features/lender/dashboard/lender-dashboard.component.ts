@@ -368,12 +368,13 @@ export class LenderDashboardComponent implements OnInit {
     this.apiService.getWallet(userId).subscribe({
       next: (wallet) => this.wallet.set(wallet),
       error: () => this.wallet.set({
+        walletId: '',
         userId,
-        balance: 0,
         availableBalance: 0,
         pendingBalance: 0,
-        currency: 'GBP',
-        lastUpdated: new Date().toISOString()
+        reservedBalance: 0,
+        totalBalance: 0,
+        lastUpdatedAt: new Date().toISOString()
       })
     });
 

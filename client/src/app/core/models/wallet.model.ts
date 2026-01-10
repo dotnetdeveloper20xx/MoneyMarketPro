@@ -1,10 +1,11 @@
 export interface Wallet {
+  walletId: string;
   userId: string;
-  balance: number;
   availableBalance: number;
   pendingBalance: number;
-  currency: string;
-  lastUpdated: string;
+  reservedBalance: number;
+  totalBalance: number;
+  lastUpdatedAt: string;
 }
 
 export interface WalletTransaction {
@@ -31,10 +32,10 @@ export type TransactionStatus = 'Pending' | 'Completed' | 'Failed' | 'Cancelled'
 
 export interface DepositRequest {
   amount: number;
-  paymentMethod: string;
+  reference?: string;
 }
 
 export interface WithdrawRequest {
   amount: number;
-  bankAccount: string;
+  bankAccountReference?: string;
 }

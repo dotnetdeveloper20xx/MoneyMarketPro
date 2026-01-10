@@ -52,7 +52,7 @@ import { Loan, UpcomingPayment, Wallet } from '../../../core/models';
             <div class="mm-stat-card__icon mm-stat-card__icon--primary">
               <mat-icon>account_balance_wallet</mat-icon>
             </div>
-            <div class="mm-stat-card__value">{{ wallet()?.balance | currency:'GBP' }}</div>
+            <div class="mm-stat-card__value">{{ wallet()?.totalBalance | currency:'GBP' }}</div>
             <div class="mm-stat-card__label">Wallet Balance</div>
           </div>
 
@@ -342,7 +342,7 @@ export class BorrowerDashboardComponent implements OnInit {
     // Load wallet
     this.apiService.getWallet(userId).subscribe({
       next: (wallet) => this.wallet.set(wallet),
-      error: () => this.wallet.set({ userId, balance: 0, availableBalance: 0, pendingBalance: 0, currency: 'GBP', lastUpdated: new Date().toISOString() })
+      error: () => this.wallet.set({ walletId: '', userId, availableBalance: 0, pendingBalance: 0, reservedBalance: 0, totalBalance: 0, lastUpdatedAt: new Date().toISOString() })
     });
 
     // For demo purposes, set some sample data

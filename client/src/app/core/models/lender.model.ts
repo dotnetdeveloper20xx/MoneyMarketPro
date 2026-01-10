@@ -43,8 +43,11 @@ export interface Investment {
   amount: number;
   interestRate: number;
   expectedReturn: number;
+  returnedAmount: number;
   status: 'Active' | 'Completed' | 'Defaulted';
   investedAt: string;
+  completedAt: string | null;
+  nextPaymentDate: string | null;
   borrowerName: string;
   loanPurpose: string;
 }
