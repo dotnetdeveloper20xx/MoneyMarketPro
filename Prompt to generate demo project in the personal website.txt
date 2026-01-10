@@ -1,0 +1,457 @@
+# Portfolio Demo Site Generator - Reusable Template
+
+## 🎯 PURPOSE
+Generate a polished, professional portfolio demo site that showcases a full-stack application to potential employers and clients. The output should be a self-contained static HTML site that sells technical skills through real code examples, visual diagrams, and impressive presentation.
+
+---
+
+## 👤 DEVELOPER INFORMATION (CUSTOMIZE THIS)
+
+```
+Developer Name: [YOUR NAME]
+Portfolio Website: [YOUR WEBSITE]
+Role Title: [YOUR TITLE, e.g., "Full Stack .NET Developer"]
+Copyright Year: [CURRENT YEAR]
+```
+
+### Attribution Requirements:
+- Every page must have "Developed by [Name]" badge in header navigation
+- Footer on every page with: © [Year] [Name]. All rights reserved.
+- Link to portfolio website in header badge and footer
+- "Development & Architecture by [Name]" in footer
+- IP disclaimer protecting your work
+
+---
+
+## 📋 DEMO DISCLAIMER (Include on all pages)
+
+Frame the demo positively - it enhances credibility:
+- "Portfolio Demonstration" badge in hero sections
+- Confidentiality notice: sanitized version respecting NDAs
+- "Architecture and patterns by [Developer Name]"
+- Sample data disclaimer where screenshots appear
+
+---
+
+## 🚀 EXECUTION APPROACH
+
+### DO NOT use phased stop-and-wait approach. Instead:
+1. Explore codebase thoroughly using an exploration agent
+2. Read actual code files to extract real snippets
+3. Generate ALL files in one session
+4. Open in browser for user to review
+
+### Key Principles:
+- Base ALL content on ACTUAL code found - never invent features
+- Include REAL code snippets with file paths
+- Read 8-12 key files to get impressive examples
+- Highlight what's genuinely impressive in the codebase
+
+---
+
+## 🔍 DISCOVERY PHASE
+
+### Explore the Codebase For:
+
+**Backend (adapt based on tech stack):**
+- Architecture pattern (Clean Architecture, N-Tier, Vertical Slice, Hexagonal, etc.)
+- Design patterns (Repository, CQRS, Mediator, Factory, Strategy, etc.)
+- Domain entities, value objects, aggregates
+- API controllers and routing structure
+- Database/ORM setup and configurations
+- Authentication/Authorization implementation
+- Validation approach
+- Error handling patterns
+- Middleware, interceptors, filters
+
+**Frontend (adapt based on framework):**
+- Component architecture (standalone, modules, etc.)
+- State management (Signals, NgRx, Redux, Zustand, Context, etc.)
+- Routing and lazy loading
+- HTTP interceptors/middleware
+- Route guards/protection
+- Form handling approach
+- UI library/framework used
+
+### Files to Read for Code Snippets:
+Prioritize reading these types of files for impressive examples:
+1. Base entity/aggregate root classes
+2. Value objects with validation
+3. Main domain entity (richest business logic)
+4. CQRS command/query handlers or service classes
+5. Validation pipeline/middleware
+6. Auth service/JWT implementation
+7. Database interceptors or middleware
+8. Base controller or API patterns
+9. Frontend auth/state service
+10. Route guards
+11. HTTP interceptors
+12. A feature component showing patterns
+
+---
+
+## 📁 OUTPUT STRUCTURE
+
+```
+portfolio-demo/
+├── index.html          # Landing page - sells the project
+├── backend.html        # Technical deep dive with code
+├── frontend.html       # Feature showcase with patterns
+├── styles.css          # Professional styling (800+ lines)
+├── README.md           # Usage and deployment guide
+├── PLAN.md             # Discovery findings
+├── SCREENSHOTS.md      # Screenshot capture guide
+├── LICENSE.md          # Copyright protection
+└── screenshots/
+    └── .gitkeep
+```
+
+---
+
+## 🎨 DESIGN SPECIFICATIONS
+
+### Color Scheme (CSS Variables):
+```css
+:root {
+    /* Primary - Trust/Professional */
+    --primary: #0d3880;
+    --primary-light: #1a4fa0;
+
+    /* Secondary - Modern/Tech */
+    --secondary: #00a0d2;
+
+    /* Accent - Success/Action */
+    --accent: #28a745;
+
+    /* Neutrals */
+    --dark: #1a1a2e;
+    --gray-900 through --gray-100;
+    --white: #ffffff;
+}
+```
+
+### Typography:
+- Headings: Inter or Poppins (Google Fonts)
+- Code: JetBrains Mono or Fira Code
+- Body: System fonts for performance
+
+### Required CDN Includes:
+```html
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Prism.js for Code Highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+```
+
+---
+
+## 📄 PAGE SPECIFICATIONS
+
+### index.html (Landing Page)
+
+**Structure:**
+1. **Sticky Navigation Bar**
+   - Logo/App name with icon
+   - Nav links: Home | Backend | Frontend
+   - Developer badge (gradient button linking to portfolio)
+
+2. **Hero Section** (gradient background with decorative radials)
+   - "Portfolio Demonstration" badge (glassmorphism style)
+   - Large app title with icon
+   - Tagline (e.g., "Enterprise P2P Lending Platform")
+   - Description paragraph
+   - "Architecture & Development by [Name]" with link
+   - Tech stack badges row (icons + labels)
+   - CTA buttons: "Explore Backend" | "View Frontend" | "Full Portfolio"
+
+3. **Disclaimer Banner** (subtle, blue gradient)
+   - Info icon + confidentiality notice
+   - Link to developer website
+
+4. **About Section**
+   - What the application does
+   - Three feature cards (for different user types/features)
+
+5. **Technical Highlights Section** (6 cards in grid)
+   - Each card: icon, title, description
+   - Highlight the most impressive patterns found
+
+6. **Navigation Cards** (large clickable cards)
+   - Backend card with icon, description, bullet points
+   - Frontend card with icon, description, bullet points
+
+7. **Developer Section** (gradient background)
+   - Avatar placeholder
+   - Name, title
+   - Brief bio
+   - CTA to portfolio
+
+8. **Tech Stack Summary** (3 columns)
+   - Backend technologies
+   - Frontend technologies
+   - Architecture patterns
+
+9. **Footer**
+   - Brand section
+   - Quick links
+   - Developer info with prominent link
+   - Copyright line
+   - IP disclaimer box
+
+---
+
+### backend.html (Technical Deep Dive)
+
+**Structure:**
+1. **Navigation** (same as index)
+
+2. **Hero Section** (compact version)
+   - "Portfolio Demo - Technical Deep Dive" badge
+   - "Backend Architecture" title
+   - Subtitle describing the stack
+   - Tech badges row
+
+3. **Architecture Diagram Section**
+   - Visual diagram using colored div boxes
+   - Show layers: API → Application → Domain
+   - Side boxes for Infrastructure & Persistence
+   - Arrows between layers
+   - "Why This Matters" highlight box
+
+4. **Pattern Sections** (repeat for each major pattern found):
+
+   **Pattern Card Structure:**
+   ```html
+   <div class="pattern-card">
+       <div class="pattern-header">
+           <h3><i class="icon"></i> Pattern Name</h3>
+           <span class="file-path">/path/to/file.cs</span>
+       </div>
+       <p class="pattern-description">Why this pattern matters...</p>
+       <pre><code class="language-csharp">// Actual code from project</code></pre>
+   </div>
+   ```
+
+   Include patterns like:
+   - Aggregate Root / Base Entity
+   - Value Objects
+   - Rich Domain Entity
+   - Result Pattern / Error Handling
+   - CQRS Handler / Service Pattern
+   - Validation Pipeline
+   - Repository / Data Access
+
+5. **CQRS/Pipeline Diagram** (if applicable)
+   - Flow diagram: Request → Pipeline → Handler → Result
+   - Colored boxes with icons
+
+6. **API Endpoints Section**
+   - Grid of endpoint groups
+   - Method badges (GET=blue, POST=green, etc.)
+   - Endpoint paths in monospace
+
+7. **Data Layer Section**
+   - Interceptor/Middleware cards
+   - Auditing, soft delete, events, etc.
+
+8. **Security Section**
+   - JWT/Auth code snippet
+   - Role-based authorization list
+   - Security features list
+
+9. **Tech Stack Grid**
+   - Icon cards for each technology
+   - Hover effects
+
+10. **Stats Grid**
+    - Large numbers with labels
+    - e.g., "20+ Handlers", "4 Pipeline Behaviors", etc.
+
+11. **Footer** (same as index)
+
+---
+
+### frontend.html (Feature Showcase)
+
+**Structure:**
+1. **Navigation** (same)
+
+2. **Hero Section** (compact)
+   - "Feature Showcase" badge
+   - "Frontend Experience" title
+   - Tech badges for frontend stack
+
+3. **User Flows Section**
+   - 3 cards for different user journeys/roles
+   - Each with icon, title, description, feature bullets
+   - Color-coded by role
+
+4. **State Management Section**
+   - Code snippet showing auth/state service
+   - "Why This Matters" highlight box
+
+5. **Route Guards Section**
+   - Code snippet
+   - Grid of guard cards with descriptions
+
+6. **HTTP Interceptor Section**
+   - Code snippet
+   - Flow diagram: Request → API → 401? → Refresh → Retry
+
+7. **Screenshots Section**
+   - Note about sample data
+   - Categories (e.g., Borrower, Lender, Admin)
+   - Screenshot placeholder cards with descriptions
+   - Placeholders should show icon + label
+
+8. **Component Architecture Section**
+   - Folder structure in code block
+   - Feature cards explaining the structure
+
+9. **Tech Stack Grid** (same style as backend)
+
+10. **Stats Grid**
+
+11. **Footer** (same)
+
+---
+
+## 🎯 CSS REQUIREMENTS (styles.css)
+
+### Must Include:
+- CSS custom properties (variables) at :root
+- Reset styles (box-sizing, margin, padding)
+- Container with max-width 1200px
+- Responsive breakpoints (1024px, 768px, 480px)
+- Print styles
+
+### Component Styles Needed:
+```
+Navigation:
+- .navbar (sticky, white bg, shadow)
+- .nav-brand, .nav-links, .developer-badge
+
+Hero:
+- .hero, .hero-main, .hero-compact
+- .demo-badge (glassmorphism)
+- .hero-title, .hero-tagline, .hero-description
+- .tech-badges, .badge
+- .btn, .btn-primary, .btn-secondary, .btn-outline
+
+Content:
+- .main-content, .content-section
+- .section-header, .section-icon
+
+Cards:
+- .pattern-card, .pattern-header, .file-path
+- .highlight-card, .highlight-icon
+- .nav-card, .nav-card-icon, .nav-card-content
+- .stat-card, .stat-number, .stat-label
+- .tech-item, .tech-icon
+
+Diagrams:
+- .architecture-diagram, .arch-layer, .arch-arrow
+- .cqrs-diagram, .cqrs-flow, .cqrs-box
+
+Grids:
+- .stats-grid, .tech-stack-grid
+- .highlights-grid, .guards-grid
+- .user-flows, .user-flow-card
+
+Code:
+- pre[class*="language-"]
+- .file-path styling
+
+Footer:
+- .footer, .footer-content, .footer-bottom
+- .footer-disclaimer
+
+Utilities:
+- .container
+- .highlight-box
+- Responsive utilities
+```
+
+### Hover Effects:
+- Cards: translateY(-4px) + shadow increase
+- Buttons: translateY(-2px) + shadow
+- Links: color transition
+
+### Code Block Styling:
+- Dark background (prism-tomorrow theme)
+- Rounded corners
+- Proper padding
+- Horizontal scroll for long lines
+
+---
+
+## 📸 SCREENSHOTS.MD Template
+
+For each screenshot include:
+```markdown
+### SS-XX: [Page Name]
+| Field | Value |
+|-------|-------|
+| **Route** | /path |
+| **State** | Logged in as [Role] |
+| **Capture** | Full page |
+| **Filename** | `name.png` |
+| **Notes** | What to show |
+```
+
+Categories to cover:
+- Public pages (landing, login, register)
+- Each user role's main flows
+- Admin/management views
+- Technical pages (Swagger, health checks)
+
+---
+
+## ✅ QUALITY CHECKLIST
+
+Before completing, verify:
+- [ ] All code snippets are REAL code from the project
+- [ ] File paths are accurate
+- [ ] All internal links work
+- [ ] Developer attribution on every page
+- [ ] Copyright in all footers
+- [ ] Portfolio link works
+- [ ] Responsive on mobile
+- [ ] Code highlighting works
+- [ ] No placeholder text (except screenshots)
+- [ ] Consistent styling across pages
+- [ ] Diagrams are clear and labeled
+- [ ] Stats numbers are accurate
+
+---
+
+## 💡 TIPS FOR EXCELLENCE
+
+1. **Read Before Writing**: Read 8-12 actual code files before generating HTML
+2. **Be Specific**: Use real class names, method names, file paths
+3. **Show Don't Tell**: Code snippets > descriptions
+4. **Visual Hierarchy**: Use icons, colors, and spacing effectively
+5. **Sell the Skills**: Frame patterns in terms of why they matter
+6. **Keep Snippets Focused**: 15-40 lines ideal, remove noise
+7. **Consistent Voice**: Professional, confident, not arrogant
+8. **Highlight Uniqueness**: If something is impressive, call it out
+
+---
+
+## 🚀 START COMMAND
+
+When you receive this prompt:
+1. Explore the codebase thoroughly (use exploration agent if available)
+2. Read key code files to extract real snippets
+3. Generate all files in portfolio-demo/ folder
+4. Create comprehensive styles.css (800+ lines)
+5. Open index.html in browser for review
+
+**Remember**: This represents professional work. Quality over speed. Real code over invented examples. Sell the skills.
